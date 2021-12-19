@@ -3101,7 +3101,6 @@ import os
 import os.path
 import time
 
-
 # print(os.getcwd())
 # print(os.listdir())
 # os.mkdir("folder")
@@ -3211,7 +3210,18 @@ import time
 #     elif os.path.isdir(p):
 #         print(f"{obj} - dir")
 
-print("Вносим изменения")
-print("*" * 40)
-print("Вносим изменения на новом утройстве")
-print("*" * 40)
+# print("Вносим изменения")
+# print("*" * 40)
+# print("Вносим изменения на новом утройстве")
+# print("*" * 40)
+
+
+# def sum_date(a, b):
+#     return a + b
+#
+#
+# print(sum_date(3, 2))
+# print(sum_date("Hello", "world"))
+
+
+print("Получилось")
