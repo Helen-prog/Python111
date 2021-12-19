@@ -3210,3 +3210,5 @@ import time
 #         print(f"{obj} - file - {os.path.getsize(p)} bytes")
 #     elif os.path.isdir(p):
 #         print(f"{obj} - dir")
+
+print("Вносим изменения")
