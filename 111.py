@@ -3224,4 +3224,56 @@ import time
 # print(sum_date("Hello", "world"))
 
 
-print("Получилось")
+# print("Получилось")
+
+
+# for root, dirs, files in os.walk("Work"):
+#     for name in files:
+#         j = os.path.join(root, name)
+#         s = os.path.getsize(j)
+#         if s != 0:
+#             print(name, s, "bytes")
+#         if s == 0:
+#             print(name)
+#             os.rename(j, os.path.join("D_Z", name))
+#             print(f"файл {name} перемещен по адресу Work/D_Z ")
+
+# for root, dirs, files in os.walk("Work"):
+#     for name in files:
+#         s = os.path.getsize(os.path.join(root, name))
+#         if s != 0:
+#             print(name, s, "bytes")
+
+# EMPTY_DIR = 'Work/empty_files'
+# for root, dirs, files in os.walk("Work"):
+#     if "Work" == EMPTY_DIR:
+#         continue
+#     for name in files:
+#         file_path = os.path.join("Work", name)
+#         file_size = os.path.getsize(file_path)
+#         if file_size == 0:
+#             # print(name)
+#             os.rename(file_path, os.path.join(EMPTY_DIR, name))
+#             print(f"файл {name} перемещен из папки {root} в папку Work/D_Z")
+import os, os.path
+
+
+def info_files(root, folder):
+    for root, dirs, files in os.walk(root):
+        if root == folder:
+            continue
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_size = os.path.getsize(file_path)
+            if file_size == 0:
+                os.rename(file_path, os.path.join(folder, file))
+                print(f"Файл {file} перемещен из папки {root} в папку {folder}")
+            else:
+                print(f"{file_path} - {file_size} bytes")
+
+
+info_files('Work', 'Work/D_Z')
+
+
+
+
