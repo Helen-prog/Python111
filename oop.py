@@ -2684,7 +2684,6 @@ from math import pi
 
 import pickle
 
-
 # file_name = 'basket.txt'
 # shop_list = {
 #     "фрукты": ("яблоки", "манго"),
@@ -2882,7 +2881,13 @@ class Student:
 
     @classmethod
     def dump_to_json(cls, stud, filename):
-        data = {"name": stud.name, "marks": stud.marks}
+        try:
+            data = json.load(open(filename))
+        except FileNotFoundError:
+            data = []
+
+        data.append({"name": stud.name, "marks": stud.marks})
+        # print("-> ", data)
         with open(filename, "w") as f:
             json.dump(data, f, indent=2)
 
@@ -2915,18 +2920,23 @@ class Group:
 
     @classmethod
     def dump_group(cls, file, group):
+        try:
+            data = json.load(open(file))
+        except FileNotFoundError:
+            data = []
+
         with open(file, 'w') as f:
             stud_list = []
             for i in group.students:
                 stud_list.append([i.name, i.marks])
             tmp = {"Students": stud_list}
-            json.dump(tmp["Students"], f)
+            data.append(tmp["Students"])
+            json.dump(data, f)
 
     @classmethod
     def upload_jornal(cls, filename):
         with open(filename, "r") as f:
             print(json.load(f))
-
 
 
 st1 = Student("Bodnya", [5, 4, 3, 4, 5, 3])
@@ -2947,9 +2957,9 @@ print("*" * 20)
 print(my_group)
 print(my_group2)
 Student.dump_to_json(st1, "student.json")
-# Student.dump_to_json(st2, "student.json")
+Student.dump_to_json(st2, "student.json")
 Student.load_from_file("student.json")
 
-Group.dump_group("group.json", my_group2)
+# Group.dump_group("group.json", my_group2)
 # Group.dump_group("group.json", my_group)
-Group.upload_jornal("group.json")
+# Group.upload_jornal("group.json")
