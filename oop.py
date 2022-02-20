@@ -1275,1691 +1275,2095 @@
 # for elem in e:
 #     elem.print_value()
 #     print(f"= {elem.convert_to_rub():.2f} {Currency.suffix}")
-import cmath
-from math import pi
-
-# class Table:
-#     def __init__(self, width=None, length=None, radius=None):
-#         if radius is None:
-#             # self._width = width
-#             # self._length = length
-#             # self.set_sides(width, length)
-#             if length is None:
-#                 self._width = self._length = width
-#             else:
-#                 self._width = width
-#                 self._length = length
-#         else:
-#             self._radius = radius
+# import cmath
+# from math import pi
+#
+# # class Table:
+# #     def __init__(self, width=None, length=None, radius=None):
+# #         if radius is None:
+# #             # self._width = width
+# #             # self._length = length
+# #             # self.set_sides(width, length)
+# #             if length is None:
+# #                 self._width = self._length = width
+# #             else:
+# #                 self._width = width
+# #                 self._length = length
+# #         else:
+# #             self._radius = radius
+# #
+# #     # def set_sides(self, width=None, length=None):
+# #     #     if length is None:
+# #     #         self._width = self._length = width
+# #     #     else:
+# #     #         self._width = width
+# #     #         self._length = length
+# #
+# #     def calc_area(self):
+# #         raise NotImplementedError("В дочернем классе должен быть определен метод calc_area()")
+# #
+# #
+# # class Sq_table(Table):
+# #     def calc_area(self):
+# #         return self._width * self._length
+# #
+# #
+# # class Round_table(Table):
+# #     def calc_area(self):
+# #         return round(pi * self._radius ** 2, 2)
+# #
+# #
+# # t = Sq_table(20, 10)
+# # print(t.__dict__)
+# # print(t.calc_area())
+# #
+# # t2 = Sq_table(20)
+# # print(t2.__dict__)
+# # print(t2.calc_area())
+# #
+# # t1 = Round_table(radius=20)
+# # print(t1.__dict__)
+# # print(t1.calc_area())
+#
+#
+# # from abc import ABC, abstractmethod
+# #
+# #
+# # class IFather(ABC):
+# #     @abstractmethod
+# #     def display1(self):
+# #         pass
+# #
+# #     @abstractmethod
+# #     def display2(self):
+# #         pass
+# #
+# #
+# # class Child(IFather):
+# #     def display1(self):
+# #         print("Child Class")
+# #
+# #
+# # class Grandchild(Child):
+# #     def display2(self):
+# #         print("Grandchild Class")
+# #
+# #
+# # gc = Grandchild()
+# # gc.display1()
+# # gc.display2()
+#
+# # class MyOuter:
+# #     age = 18
+# #
+# #     def __init__(self, name):
+# #         self.name = name
+# #
+# #     @classmethod
+# #     def outer_class_method(cls):
+# #         print("Я - метод внешнего класса")
+# #
+# #     class MyInner:
+# #         def __init__(self, inner_name):
+# #             self.inner_name = inner_name
+# #
+# #         def inner_method(self):
+# #             print("Я - метод внутреннего класса")
+# #             MyOuter.outer_class_method()
+# #             print(MyOuter.age)
+# #             # print(self.name)
+# #
+# #
+# #
+# # out = MyOuter('внешний')
+# # inner = out.MyInner('внутренний')
+# # print(inner.inner_name)
+# # inner.inner_method()
 #
-#     # def set_sides(self, width=None, length=None):
-#     #     if length is None:
-#     #         self._width = self._length = width
-#     #     else:
-#     #         self._width = width
-#     #         self._length = length
 #
-#     def calc_area(self):
-#         raise NotImplementedError("В дочернем классе должен быть определен метод calc_area()")
-#
-#
-# class Sq_table(Table):
-#     def calc_area(self):
-#         return self._width * self._length
-#
-#
-# class Round_table(Table):
-#     def calc_area(self):
-#         return round(pi * self._radius ** 2, 2)
-#
-#
-# t = Sq_table(20, 10)
-# print(t.__dict__)
-# print(t.calc_area())
-#
-# t2 = Sq_table(20)
-# print(t2.__dict__)
-# print(t2.calc_area())
-#
-# t1 = Round_table(radius=20)
-# print(t1.__dict__)
-# print(t1.calc_area())
-
-
-# from abc import ABC, abstractmethod
-#
-#
-# class IFather(ABC):
-#     @abstractmethod
-#     def display1(self):
-#         pass
-#
-#     @abstractmethod
-#     def display2(self):
-#         pass
-#
-#
-# class Child(IFather):
-#     def display1(self):
-#         print("Child Class")
-#
-#
-# class Grandchild(Child):
-#     def display2(self):
-#         print("Grandchild Class")
-#
-#
-# gc = Grandchild()
-# gc.display1()
-# gc.display2()
-
-# class MyOuter:
-#     age = 18
-#
-#     def __init__(self, name):
-#         self.name = name
-#
-#     @classmethod
-#     def outer_class_method(cls):
-#         print("Я - метод внешнего класса")
-#
-#     class MyInner:
-#         def __init__(self, inner_name):
-#             self.inner_name = inner_name
-#
-#         def inner_method(self):
-#             print("Я - метод внутреннего класса")
-#             MyOuter.outer_class_method()
-#             print(MyOuter.age)
-#             # print(self.name)
-#
-#
-#
-# out = MyOuter('внешний')
-# inner = out.MyInner('внутренний')
-# print(inner.inner_name)
-# inner.inner_method()
-
-
-# class Color:
-#
-#     def __init__(self):
-#         self.name = 'Green'
-#         self.lg = self.LightGreen()
-#
-#     def show(self):
-#         print("Name:", self.name)
-#         self.lg.display()
-#
-#     class LightGreen:
-#         def __init__(self):
-#             self.name = "Light Green"
-#             self.code = '024avc'
-#
-#         def display(self):
-#             print("Name:", self.name)
-#             print("Code:", self.code)
-#
-#
-# outer = Color()
-# outer.show()
-# g = outer.lg
-# g.display()
-
-#
-# class Employee:
-#     def __init__(self):
-#         self.name = "Employee"
-#         self.intern = self.Intern()
-#         self.head = self.Head()
-#
-#     def show(self):
-#         print("Employee List")
-#         print("Name", self.name)
-#
-#     class Intern:
-#         def __init__(self):
-#             self.name = "Smith"
-#             self.id = "657"
-#
-#         def display(self):
-#             print("Name", self.name)
-#             print("Id", self.id)
-#
-#     class Head:
-#         def __init__(self):
-#             self.name = "Albina"
-#             self.id = "007"
-#
-#         def display(self):
-#             print("Name", self.name)
-#             print("Degree", self.id)
-#
-#
-# outer = Employee()
-# outer.show()
-# d1 = outer.intern
-# d1.display()
-# d2 = outer.head
-# d2.display()
-
-# class Geeks:
-#     def __init__(self):
-#         self.inner = self.Inner()
-#
-#     def show(self):
-#         print('Outer Class')
-#
-#     class Inner:
-#         def __init__(self):
-#             self.inner_inner = self.InnerClass()
-#
-#         def show(self):
-#             print("Inner Class")
-#
-#         class InnerClass:
-#             def show(self):
-#                 print("Inner Class of Inner Class")
-#
-#
-# outer = Geeks()
-# outer.show()
-#
-# # inner1 = outer.inner
-# # inner1.show()
-#
-# inner2 = outer.inner.inner_inner
-# inner2.show()
-
-# class Computer:
-#     def __init__(self):
-#         self.name = "PC001"
-#         self.os = self.OS()
-#         self.cpu = self.CPU()
-#
-#     class OS:
-#         def system(self):
-#             return "Windows 10"
-#
-#     class CPU:
-#         def make(self):
-#             return "Intel"
-#
-#         def model(self):
-#             return "Core-i7"
-#
-#
-# cp = Computer()
-# print(cp.os.system())
-# print(cp.cpu.make())
-# print(cp.cpu.model())
-
-# class Base:
-#     # def __init__(self):
-#     #     self.db = self.Inner()
-#
-#     def display(self):
-#         print("Base Class")
-#
-#     class Inner:
-#         def display1(self):
-#             print("Inner Of Base Class")
-#
-#
-# class SubClass(Base):
-#     def __init__(self):
-#         print("SubClass")
-#         super().__init__()
-#
-#     class Inner(Base.Inner):
-#         def display2(self):
-#             print("Inner Of SubClass")
-#
-#
-# a = SubClass()
-# a.display()
-# print()
-# # b = a.db
-# b = SubClass.Inner()
-# b.display1()
-# print()
-# b.display2()
-
-# class Creature:
-#     def __init__(self, name):
-#         self.name = name
-#
-#
-# class Animal(Creature):
-#     def sleep(self):
-#         print(self.name + " is sleeping")
-#
-#
-# class Pet(Creature):
-#     def play(self):
-#         print(self.name + " is playing")
-#
-#
-# class Dog(Animal, Pet):
-#     def bark(self):
-#         print(self.name + " is barking")
-#
-#
-# d = Dog("Buddy")
-# d.sleep()
-# d.play()
-# d.bark()
-
-# class A(object):
-#     # def __init__(self):
-#     #     print("Инициализатор класса А")
-#
-#     def hi(self):
-#         print("A")
-#
-#
-# # class AA(object):
+# # class Color:
+# #
 # #     def __init__(self):
-# #         print("Инициализатор класса А")
+# #         self.name = 'Green'
+# #         self.lg = self.LightGreen()
+# #
+# #     def show(self):
+# #         print("Name:", self.name)
+# #         self.lg.display()
+# #
+# #     class LightGreen:
+# #         def __init__(self):
+# #             self.name = "Light Green"
+# #             self.code = '024avc'
+# #
+# #         def display(self):
+# #             print("Name:", self.name)
+# #             print("Code:", self.code)
+# #
+# #
+# # outer = Color()
+# # outer.show()
+# # g = outer.lg
+# # g.display()
+#
+# #
+# # class Employee:
+# #     def __init__(self):
+# #         self.name = "Employee"
+# #         self.intern = self.Intern()
+# #         self.head = self.Head()
+# #
+# #     def show(self):
+# #         print("Employee List")
+# #         print("Name", self.name)
+# #
+# #     class Intern:
+# #         def __init__(self):
+# #             self.name = "Smith"
+# #             self.id = "657"
+# #
+# #         def display(self):
+# #             print("Name", self.name)
+# #             print("Id", self.id)
+# #
+# #     class Head:
+# #         def __init__(self):
+# #             self.name = "Albina"
+# #             self.id = "007"
+# #
+# #         def display(self):
+# #             print("Name", self.name)
+# #             print("Degree", self.id)
+# #
+# #
+# # outer = Employee()
+# # outer.show()
+# # d1 = outer.intern
+# # d1.display()
+# # d2 = outer.head
+# # d2.display()
+#
+# # class Geeks:
+# #     def __init__(self):
+# #         self.inner = self.Inner()
+# #
+# #     def show(self):
+# #         print('Outer Class')
+# #
+# #     class Inner:
+# #         def __init__(self):
+# #             self.inner_inner = self.InnerClass()
+# #
+# #         def show(self):
+# #             print("Inner Class")
+# #
+# #         class InnerClass:
+# #             def show(self):
+# #                 print("Inner Class of Inner Class")
+# #
+# #
+# # outer = Geeks()
+# # outer.show()
+# #
+# # # inner1 = outer.inner
+# # # inner1.show()
+# #
+# # inner2 = outer.inner.inner_inner
+# # inner2.show()
+#
+# # class Computer:
+# #     def __init__(self):
+# #         self.name = "PC001"
+# #         self.os = self.OS()
+# #         self.cpu = self.CPU()
+# #
+# #     class OS:
+# #         def system(self):
+# #             return "Windows 10"
+# #
+# #     class CPU:
+# #         def make(self):
+# #             return "Intel"
+# #
+# #         def model(self):
+# #             return "Core-i7"
+# #
+# #
+# # cp = Computer()
+# # print(cp.os.system())
+# # print(cp.cpu.make())
+# # print(cp.cpu.model())
+#
+# # class Base:
+# #     # def __init__(self):
+# #     #     self.db = self.Inner()
+# #
+# #     def display(self):
+# #         print("Base Class")
+# #
+# #     class Inner:
+# #         def display1(self):
+# #             print("Inner Of Base Class")
+# #
+# #
+# # class SubClass(Base):
+# #     def __init__(self):
+# #         print("SubClass")
+# #         super().__init__()
+# #
+# #     class Inner(Base.Inner):
+# #         def display2(self):
+# #             print("Inner Of SubClass")
+# #
+# #
+# # a = SubClass()
+# # a.display()
+# # print()
+# # # b = a.db
+# # b = SubClass.Inner()
+# # b.display1()
+# # print()
+# # b.display2()
+#
+# # class Creature:
+# #     def __init__(self, name):
+# #         self.name = name
+# #
+# #
+# # class Animal(Creature):
+# #     def sleep(self):
+# #         print(self.name + " is sleeping")
+# #
+# #
+# # class Pet(Creature):
+# #     def play(self):
+# #         print(self.name + " is playing")
+# #
+# #
+# # class Dog(Animal, Pet):
+# #     def bark(self):
+# #         print(self.name + " is barking")
+# #
+# #
+# # d = Dog("Buddy")
+# # d.sleep()
+# # d.play()
+# # d.bark()
+#
+# # class A(object):
+# #     # def __init__(self):
+# #     #     print("Инициализатор класса А")
+# #
+# #     def hi(self):
+# #         print("A")
+# #
+# #
+# # # class AA(object):
+# # #     def __init__(self):
+# # #         print("Инициализатор класса А")
+# #
+# #
+# # class B(A):
+# #     # def __init__(self):
+# #     #     print("Инициализатор класса B")
+# #         # super().__init__()
+# #     # def hi(self):
+# #     #     print("B")
+# #     pass
+# #
+# #
+# # class C(A):
+# #     # def __init__(self):
+# #     #     print("Инициализатор класса C")
+# #         # super().__init__()
+# #     def hi(self):
+# #         print("C")
+# #
+# #
+# # class D(B, C):
+# #     # def __init__(self):
+# #     #     print("Инициализатор класса D")
+# #     #     C.__init__(self)
+# #     # def hi(self):
+# #     #     print("D")
+# #     pass
+# #
+# #
+# # d = D()
+# # d.hi()
+# # print(D.__mro__)
+#
+# # class Point:
+# #     def __init__(self, x=0, y=0):
+# #         self.x = x
+# #         self.y = y
+# #
+# #     def __str__(self):
+# #         return f"({self.x}, {self.y})"
+# #
+# #
+# # class Styles:
+# #     def __init__(self):
+# #         print("Инициализатор Styles")
+# #         super().__init__()
+# #
+# #
+# # class Pos:
+# #     def __init__(self):
+# #         print("Инициализатор класса Pos")
+# #         super().__init__()
+# #
+# #
+# # class Line(Styles, Pos):
+# #     def __init__(self, sp: Point, ep: Point, color="red", width=1):
+# #         self.color = color
+# #         self.width = width
+# #         self.sp = sp
+# #         self.ep = ep
+# #         super().__init__()
+# #
+# #     def draw(self):
+# #         print(f"Рисование линии: {self.sp}, {self.ep}, {self.color}, {self.width}")
+# #
+# #
+# # l1 = Line(Point(10, 10), Point(100, 100), "green", 5)
+# # l1.draw()
+#
+# # class Displayer:
+# #     @staticmethod
+# #     def display(message):
+# #         print(message)
+# #
+# #
+# # class LoggerMixin:
+# #     def log(self, message, filename="logfile.txt"):
+# #         with open(filename, 'a') as fh:
+# #             fh.write(message)
+# #
+# #     def display(self, message):
+# #         Displayer.display(message)
+# #         self.log(message)
+# #
+# #
+# # class MySubClass(LoggerMixin, Displayer):
+# #     def log(self, message, filename=""):
+# #         super().log(message, filename="subclass.txt")
+# #
+# #
+# # s = MySubClass()
+# # s.display("Эта строка будет печататься и сохраняться в файл")
 #
 #
-# class B(A):
-#     # def __init__(self):
-#     #     print("Инициализатор класса B")
-#         # super().__init__()
-#     # def hi(self):
-#     #     print("B")
-#     pass
+# # class Goods(object):
+# #     def __init__(self, name, weight, price):
+# #         super().__init__()
+# #         print("Init Goods")
+# #         self.name = name
+# #         self.weight = weight
+# #         self.price = price
+# #
+# #     def print_info(self):
+# #         print(f"{self.name}, {self.weight}, {self.price}")
+# #
+# #
+# # class MixinLog:
+# #     ID = 0
+# #
+# #     def __init__(self):
+# #         print("Init MixinLog")
+# #         self.ID += 1
+# #         self.id = self.ID
+# #
+# #     def save_sell_log(self):
+# #         print(f"{self.id}: товар был продан в 20:35 минут")
+# #
+# #
+# # class NoteBook(Goods, MixinLog):
+# #     pass
+# #
+# #
+# # n = NoteBook("HP", 1.5, 35000)
+# # m = Goods("HP", 1.5, 35000)
+# # print(type(n))
+# # # n.print_info()
+# # # n.save_sell_log()
+# # # print(NoteBook.__mro__)
+# #
+# # a = 5
+# # print(type(a))
+# # 00:02:30  => 00:2:30
+#
+# # class Clock:
+# #     __DAY = 86400  # 24*60*60 - число секунд в одном дне
+# #
+# #     def __init__(self, secs: int):
+# #         if not isinstance(secs, int):
+# #             raise ValueError("Секунды должны быть целым числом")
+# #         self.secs = secs % self.__DAY
+# #
+# #     def get_format_time(self):
+# #         s = self.secs % 60  # секунды
+# #         m = (self.secs // 60) % 60  # минуты
+# #         h = (self.secs // 3600) % 24  # часы
+# #         return f"{Clock.__get_form(h)}:{Clock.__get_form(m)}:{Clock.__get_form(s)}"
+# #
+# #     @staticmethod
+# #     def __get_form(x):
+# #         return str(x) if x > 9 else "0" + str(x)
+# #
+# #     def __add__(self, other):
+# #         if not isinstance(other, Clock):
+# #             raise AttributeError("Правый операнд должен быть типом данных Clock")
+# #         return Clock(self.secs + other.secs)
+# #
+# #     def __eq__(self, other):
+# #         return self.secs == other.secs
+# #         # if self.secs == other.secs:
+# #         #     return True
+# #         # return False
+# #
+# #     def __ne__(self, other):
+# #         # return self.secs != other.secs
+# #         return not self.__eq__(other)
+# #
+# #     def __le__(self, other):
+# #         return self.secs <= other.secs
+# #
+# #     def __lt__(self, other):
+# #         return self.secs < other.secs
+# #
+# #     def __gt__(self, other):
+# #         return self.secs > other.secs
+# #
+# #     def __ge__(self, other):
+# #         return self.secs >= other.secs
+# #
+# #     def __getitem__(self, item):
+# #         if not isinstance(item, str):
+# #             raise ValueError("Ключ должен быть строкой")
+# #         if item == "hour":
+# #             return (self.secs // 3600) % 24
+# #         elif item == "min":
+# #             return (self.secs // 60) % 60
+# #         elif item == "sec":
+# #             return self.secs % 60
+# #         return "Неверный ключ"
+# #
+# #     def __setitem__(self, key, value):
+# #         if not isinstance(key, str):
+# #             raise ValueError("Ключ должен быть строкой")
+# #         if not isinstance(value, int):
+# #             raise ValueError("Значение должно быть целым числом ")
+# #         s = self.secs % 60  # секунды
+# #         m = (self.secs // 60) % 60  # минуты
+# #         h = (self.secs // 3600) % 24  # часы
+# #         if key == "hour":
+# #             self.secs = s + 60 * m + value * 3600
+# #         elif key == "min":
+# #             self.secs = s + 60 * value + h * 3600
+# #         elif key == "sec":
+# #             self.secs = value + 60 * m + h * 3600
+# #
+# #
+# # c1 = Clock(80000)
+# # # print(c1.get_format_time())  # 22:13:20
+# # c1["hour"] = 10
+# # print(c1["hour"], c1["min"], c1["sec"])  # 10 13 20
+#
+# # c1 = Clock(100)
+# # c2 = Clock(100)
+# # c3 = Clock(300)
+# # print(c1.get_format_time())
+# # print(c2.get_format_time())
+# # print(c3.get_format_time())
+# #
+# # if c1 == c2:
+# #     print("Время равно")
+# # if c1 != c3:
+# #     print("Время не равно")
+# #
+# # print("c3 <= c1", c3 <= c1)
+# # print("c3 < c1", c3 < c1)
+# # print("c3 >= c1", c3 >= c1)
+# # print("c3 > c1", c3 > c1)
 #
 #
-# class C(A):
-#     # def __init__(self):
-#     #     print("Инициализатор класса C")
-#         # super().__init__()
-#     def hi(self):
-#         print("C")
+# # class Student:
+# #     def __init__(self, name, marks):
+# #         self.name = name
+# #         self.marks = list(marks)
+# #
+# #     def __getitem__(self, item):
+# #         if 0 <= item < len(self.marks):
+# #             return self.marks[item]
+# #         else:
+# #             raise IndexError("Неверный индекс")
+# #
+# #     def __setitem__(self, key, value):
+# #         if not isinstance(key, int) or key < 0:
+# #             raise TypeError("Индекс должен быть целым неотрицательным числом")
+# #
+# #         if key >= len(self.marks):
+# #             off = key + 1 - len(self.marks)
+# #             self.marks.extend([None] * off)
+# #
+# #         self.marks[key] = value
+# #
+# #     def __delitem__(self, key):
+# #         if not isinstance(key, int):
+# #             raise TypeError("Индекс должен быть целым числом")
+# #
+# #         self.marks[key] = None
+# #
+# #
+# # s1 = Student("Игорь", [5, 5, 3, 4, 5])
+# # print(s1[2])
+# # s1[10] = 4
+# # print(s1[2])
+# # del s1[2]
+# # print(s1.marks)
+#
+# # class Point3D:
+# #     CH = "Координата должна быть числом"
+# #     RIGHT = "Правый операнд должен быть типом Point3D"
+# #
+# #     def __init__(self, x=0, y=0, z=0):
+# #         self.x = x
+# #         self.y = y
+# #         self.z = z
+# #
+# #     @staticmethod
+# #     def __check_value(v):
+# #         return isinstance(v, (int, float))
+# #
+# #     @staticmethod
+# #     def __check0(ex):
+# #         if ex.x == 0 or ex.y == 0 or ex.z == 0:
+# #             raise ZeroDivisionError("Ни одна из координат второго операнда не должна быть равна 0")
+# #
+# #     def __str__(self):
+# #         return f"{self.x}, {self.y}, {self.z}"
+# #
+# #     @property
+# #     def x(self):
+# #         return self.__x
+# #
+# #     @x.setter
+# #     def x(self, value):
+# #         if self.__check_value(value):
+# #             self.__x = value
+# #         else:
+# #             print(self.CH)
+# #
+# #     @property
+# #     def y(self):
+# #         return self.__y
+# #
+# #     @y.setter
+# #     def y(self, value):
+# #         if self.__check_value(value):
+# #             self.__y = value
+# #         else:
+# #             print(self.CH)
+# #
+# #     @property
+# #     def z(self):
+# #         return self.__z
+# #
+# #     @z.setter
+# #     def z(self, value):
+# #         if self.__check_value(value):
+# #             self.__z = value
+# #         else:
+# #             print(self.CH)
+# #
+# #     def __add__(self, other):
+# #         if not isinstance(other, Point3D):
+# #             raise ValueError(self.RIGHT)
+# #         else:
+# #             return Point3D(self.__x + other.x, self.__y + other.y, self.__z + other.z)
+# #
+# #     def __sub__(self, other):
+# #         if not isinstance(other, Point3D):
+# #             raise ValueError(self.RIGHT)
+# #         else:
+# #             return Point3D(self.__x - other.x, self.__y - other.y, self.__z - other.z)
+# #
+# #     def __mul__(self, other):
+# #         if not isinstance(other, Point3D):
+# #             raise ValueError(self.RIGHT)
+# #         else:
+# #             return Point3D(self.__x * other.__x, self.__y * other.__y, self.__z * other.__z)
+# #
+# #     def __truediv__(self, other):
+# #         if not isinstance(other, Point3D):
+# #             raise ValueError(self.RIGHT)
+# #         self.__check0(other)
+# #         return Point3D(self.__x / other.__x, self.__y / other.__y, self.__z / other.__z)
+# #
+# #     def __eq__(self, other):
+# #         if not isinstance(other, Point3D):
+# #             raise ValueError(self.RIGHT)
+# #         return self.__x == other.__x, self.__y == other.__y, self.__z == other.__z
+# #
+# #     def __getitem__(self, item):
+# #         if not isinstance(item, str):
+# #             raise ValueError("Ключ должен быть строкой")
+# #         elif item == "x":
+# #             return self.__x
+# #         elif item == "y":
+# #             return self.__y
+# #         elif item == "z":
+# #             return self.__z
+# #         else:
+# #             print("Неверное значение ключа")
+# #
+# #     def __setitem__(self, key, value):
+# #         if not isinstance(key, str):
+# #             raise ValueError("Ключ должен быть строкой")
+# #         if self.__check_value(value):
+# #             if key == "x":
+# #                 self.__x = value
+# #             elif key == "y":
+# #                 self.__y = value
+# #             elif key == "z":
+# #                 self.__z = value
+# #         else:
+# #             print("Координаты должны быть числами")
+# #
+# #
+# # pt = Point3D(12, 15, 18)
+# # # pt2 = Point3D(12, 15, 18)
+# # pt2 = Point3D(6, 3, 9)
+# # print(f"Координата 1-й точки: {pt}")
+# # print(f"Координата 2-й точки: {pt2}")
+# #
+# # pt3 = pt + pt2
+# # print(f"Сложение координат: ({pt3})")
+# #
+# # pt4 = pt - pt2
+# # print(f"Вычитание координат: ({pt4})")
+# #
+# # pt5 = pt * pt2
+# # print(f"Умножение координат: ({pt5})")
+# #
+# # pt6 = pt / pt2
+# # print(f"Деление координат: ({pt6})")
+# #
+# # print(f"Равенство координат: {pt == pt2}")
+# #
+# # print("x =", pt['x'], "x1 =", pt2['x'])
+# # print("y =", pt['y'], "y1 =", pt2['y'])
+# # print("z =", pt['z'], "z1 =", pt2['z'])
+# #
+# # pt['x'] = 20
+# # print(pt['x'])
+#
+# # Полиморфизм
+#
+# # class Rectangle:
+# #     def __init__(self, w, h):
+# #         self.w = w
+# #         self.h = h
+# #
+# #     def get_perimetr(self):
+# #         return 2 * (self.w + self.h)
+# #
+# #
+# # class Square:
+# #     def __init__(self, a):
+# #         self.a = a
+# #
+# #     def get_perimetr(self):
+# #         return 4 * self.a
+# #
+# #
+# # r1 = Rectangle(1, 2)
+# # r2 = Rectangle(3, 4)
+# # s1 = Square(10)
+# # s2 = Square(20)
+# #
+# # shape = [r1, r2, s1, s2]
+# # for g in shape:
+# #     print(g.get_perimetr())
+#
+# # class Number:
+# #     def __init__(self, value):
+# #         self.value = value
+# #
+# #     def total(self, a):
+# #         return self.value + int(a)
+# #
+# #
+# # class Text:
+# #     def __init__(self, value):
+# #         self.value = value
+# #
+# #     def total(self, a):
+# #         return len(self.value + str(a))
+# #
+# #
+# # t1 = Number(10)
+# # t2 = Text("Python")
+# #
+# # print(t1.total(35))
+# # print(t2.total(35))
+#
+# # class Cat:
+# #     def __init__(self, name, age):
+# #         self.name = name
+# #         self.age = age
+# #
+# #     def info(self):
+# #         print(f"Я кот. Меня зовут {self.name}. Мой возраст {self.age}.")
+# #
+# #     @staticmethod
+# #     def make_sound():
+# #         print("Пушок мяукает")
+# #
+# #
+# # class Dog:
+# #     def __init__(self, name, age):
+# #         self.name = name
+# #         self.age = age
+# #
+# #     def info(self):
+# #         print(f"Я собака. Меня зовут {self.name}. Мой возраст {self.age}.")
+# #
+# #     @staticmethod
+# #     def make_sound():
+# #         print("Мухтар гавкает")
+# #
+# #
+# # s1 = Cat("Пушок", 2.5)
+# # s2 = Dog("Мухтар", 4)
+# #
+# # s = [s1, s2]
+# #
+# # for i in s:
+# #     i.info()
+# #     i.make_sound()
+#
+# # class Human:
+# #     def __init__(self, name, surname, age):
+# #         self.name = name
+# #         self.surname = surname
+# #         self.age = age
+# #
+# #     def info(self):
+# #         print(f"{self.name} {self.surname} {self.age}")
+# #
+# #
+# # class Student(Human):
+# #     def __init__(self, speciality, group, rating, name, surname, age):
+# #         super().__init__(name, surname, age)
+# #         self.speciality = speciality
+# #         self.group = group
+# #         self.rating = rating
+# #
+# #     def info(self):
+# #         print(f"{self.speciality} {self.group} {self.rating}", end=" ")
+# #         super().info()
+# #
+# #
+# # class Teacher(Human):
+# #     def __init__(self, speciality, experience, name, surname, age):
+# #         super().__init__(name, surname, age)
+# #         self.speciality = speciality
+# #         self.experience = experience
+# #
+# #     def info(self):
+# #         print(f"{self.speciality} {self.experience}", end=" ")
+# #         super().info()
+# #
+# #
+# # class Graduate(Student):
+# #     def __init__(self, topic, speciality, group, rating, name, surname, age):
+# #         super().__init__(speciality, group, rating, name, surname, age)
+# #         self.topic = topic
+# #
+# #     def info(self):
+# #         print(f"{self.topic}", end=" ")
+# #         super().info()
+# #
+# #
+# # groups = [
+# #     Student("Батодалаев", "Даши", 16, "ГК", "Web_011", 5),
+# #     Student("Загидуллин", "Линар", 32, "РПО", "PD_011", 5),
+# #     Graduate("Шугани", "Сергей", 15, "РПО", "PD_011", 5, "Защита персональных данных"),
+# #     Teacher("Башкиров", "Алексей", 45, "Разработка приложений", 20)
+# # ]
+# #
+# # for i in groups:
+# #     i.info()
+#
+# # class Cat:
+# #     def __init__(self, name):
+# #         self.name = name
+# #
+# #     def __repr__(self):
+# #         return f"{self.__class__}: {self.name}"
+# #
+# #     def __str__(self):
+# #         return f"{self.name}"
+# #
+# #
+# # cat = Cat("Пушок")
+# # print(cat)
+#
+# # class Point:
+# #     def __init__(self, *args):
+# #         self.coords = args
+# #         print(self.coords)
+# #
+# #     def __len__(self):
+# #         return len(self.coords)
+# #
+# #     def __abs__(self):
+# #         return list(map(abs, self.coords))
+# #
+# #
+# # p = Point(1, -8, 9)
+# # print(len(p))
+# # print(abs(p))
+# # import math
+# #
+# #
+# # class Point:
+# #     __slots__ = ('x', 'y', '__length')
+# #
+# #     def __init__(self, x, y):
+# #         self.x = x
+# #         self.y = y
+# #         self.length = math.sqrt(x * x + y * y)
+# #
+# #     @property
+# #     def length(self):
+# #         return self.__length
+# #
+# #     @length.setter
+# #     def length(self, value):
+# #         self.__length = value
+# #
+# #
+# # pt = Point(1, 2)
+# # print(pt.length)
+# # pt.z = 10
+# # print(pt.__dict__)
+#
+# # class Point:
+# #     __slots__ = ('x', 'y')
+# #
+# #     def __init__(self, x, y):
+# #         self.x = x
+# #         self.y = y
 #
 #
-# class D(B, C):
-#     # def __init__(self):
-#     #     print("Инициализатор класса D")
-#     #     C.__init__(self)
-#     # def hi(self):
-#     #     print("D")
-#     pass
+# # class Point2D:
+# #
+# #     def __init__(self, x, y):
+# #         self.x = x
+# #         self.y = y
+# #
+# #
+# # pt = Point(1, 2)
+# # pt2 = Point2D(1, 2)
+# # print("pt =", pt.__sizeof__())
+# # print("pt2 =", pt2.__sizeof__() + pt2.__dict__.__sizeof__())
+#
+# # class Point:
+# #     __slots__ = ('x', 'y')
+# #
+# #     def __init__(self, x, y):
+# #         self.x = x
+# #         self.y = y
+# #
+# #
+# # class Point3D(Point):
+# #     __slots__ = 'z',
+# #
+# #     def __init__(self, x, y, z):
+# #         super().__init__(x, y)
+# #         self.z = z
+# #
+# #
+# # pt3 = Point3D(10, 20, 40)
+# # pt3.x = 30
+# # print(pt3.x, pt3.y, pt3.z)
+# # print(pt3.__dict__)
+#
+# # class MyDecorator:
+# #     def __init__(self, func):
+# #         self.func = func
+# #
+# #     def __call__(self, a, b):
+# #         # print("перед вызовом функции")
+# #         res = self.func(a, b) ** 2
+# #         # print("после вызова функции")
+# #         return res
+# #
+# # @MyDecorator
+# # def function(a, b):
+# #     return a * b
+# #
+# #
+# # print(function(2, 3))
+#
+# # class Counter:
+# #     def __init__(self):
+# #         self.counter = 0
+# #
+# #     def __call__(self, *args, **kwargs):
+# #         self.counter += 1
+# #         print(self.counter)
+# #
+# #
+# # c1 = Counter()
+# # c1()
+# # c1()
+# # c1()
+# # c2 = Counter()
+# # c2()
+# # c2()
+#
+# # class StripChars:
+# #     def __init__(self, chars):
+# #         self.chars = chars
+# #
+# #     def __call__(self, string):
+# #         if not isinstance(string, str):
+# #             raise ValueError("Аргумент должен быть строкой")
+# #
+# #         return string.strip(self.chars)
+# #
+# # # Функтор
+# # s1 = StripChars("?:!.; ")
+# # print(s1("   ?  Hello. world  !      "))
+# # print(s1("world  : ;      "))
+# #
+# #
+# # def string_strip(chars):
+# #     def wrap(string):
+# #         if not isinstance(string, str):
+# #             raise ValueError("Аргумент должен быть строкой")
+# #         return string.strip(chars)
+# #     return wrap
+# #
+# #
+# # s1 = string_strip("?:!.; ")
+# # print(s1("   ?  Hello. world  !      "))
 #
 #
-# d = D()
-# d.hi()
-# print(D.__mro__)
-
-# class Point:
-#     def __init__(self, x=0, y=0):
-#         self.x = x
-#         self.y = y
+# # class MyDecorator:
+# #     def __init__(self, func):
+# #         self.func = func
+# #
+# #     def __call__(self, *args, **kwargs):
+# #         print("перед вызовом функции")
+# #         res = self.func(*args, **kwargs)
+# #         print("после вызова функции")
+# #         return res
+# #
+# #
+# # @MyDecorator
+# # def function(a, b):
+# #     return a * b
+# #
+# #
+# # @MyDecorator
+# # def function1(a, b, c):
+# #     return a * b * c
+# #
+# #
+# # @MyDecorator
+# # def function3(a, b, c, d):
+# #     return a * b * c * d
+# #
+# #
+# # print(function(2, 3))
+# # print(function1(2, 3, 2))
+# # print(function3(2, 3, 2, 5))
 #
-#     def __str__(self):
-#         return f"({self.x}, {self.y})"
+# # class MyDecorator:
+# #     def __init__(self, arg):
+# #         self.name = arg
+# #
+# #     def __call__(self, func):
+# #         def wrap(*args, **kwargs):
+# #             print("перед вызовом функции")
+# #             print(self.name)
+# #             func(*args, **kwargs)
+# #             print("после вызова функции")
+# #
+# #         return wrap
+# #
+# #
+# # @MyDecorator("test2")
+# # def function(a, b):
+# #     print(a, b)
+# #
+# #
+# # function(2, 5)
 #
+# # class Power:
+# #     def __init__(self, arg):
+# #         self.name = arg
+# #
+# #     def __call__(self, func):
+# #         def wrap(*args, **kwargs):
+# #             res = func(*args, **kwargs)
+# #             return res ** self.name
+# #
+# #         return wrap
+# #
+# #
+# # @Power(5)
+# # def function(a, b):
+# #     return a * b
+# #
+# #
+# # print(function(2, 2))
 #
-# class Styles:
-#     def __init__(self):
-#         print("Инициализатор Styles")
-#         super().__init__()
-#
-#
-# class Pos:
-#     def __init__(self):
-#         print("Инициализатор класса Pos")
-#         super().__init__()
-#
-#
-# class Line(Styles, Pos):
-#     def __init__(self, sp: Point, ep: Point, color="red", width=1):
-#         self.color = color
-#         self.width = width
-#         self.sp = sp
-#         self.ep = ep
-#         super().__init__()
-#
-#     def draw(self):
-#         print(f"Рисование линии: {self.sp}, {self.ep}, {self.color}, {self.width}")
-#
-#
-# l1 = Line(Point(10, 10), Point(100, 100), "green", 5)
-# l1.draw()
-
-# class Displayer:
-#     @staticmethod
-#     def display(message):
-#         print(message)
-#
-#
-# class LoggerMixin:
-#     def log(self, message, filename="logfile.txt"):
-#         with open(filename, 'a') as fh:
-#             fh.write(message)
-#
-#     def display(self, message):
-#         Displayer.display(message)
-#         self.log(message)
-#
-#
-# class MySubClass(LoggerMixin, Displayer):
-#     def log(self, message, filename=""):
-#         super().log(message, filename="subclass.txt")
-#
-#
-# s = MySubClass()
-# s.display("Эта строка будет печататься и сохраняться в файл")
-
-
-# class Goods(object):
-#     def __init__(self, name, weight, price):
-#         super().__init__()
-#         print("Init Goods")
-#         self.name = name
-#         self.weight = weight
-#         self.price = price
-#
-#     def print_info(self):
-#         print(f"{self.name}, {self.weight}, {self.price}")
-#
-#
-# class MixinLog:
-#     ID = 0
-#
-#     def __init__(self):
-#         print("Init MixinLog")
-#         self.ID += 1
-#         self.id = self.ID
-#
-#     def save_sell_log(self):
-#         print(f"{self.id}: товар был продан в 20:35 минут")
-#
-#
-# class NoteBook(Goods, MixinLog):
-#     pass
-#
-#
-# n = NoteBook("HP", 1.5, 35000)
-# m = Goods("HP", 1.5, 35000)
-# print(type(n))
-# # n.print_info()
-# # n.save_sell_log()
-# # print(NoteBook.__mro__)
-#
-# a = 5
-# print(type(a))
-# 00:02:30  => 00:2:30
-
-# class Clock:
-#     __DAY = 86400  # 24*60*60 - число секунд в одном дне
-#
-#     def __init__(self, secs: int):
-#         if not isinstance(secs, int):
-#             raise ValueError("Секунды должны быть целым числом")
-#         self.secs = secs % self.__DAY
-#
-#     def get_format_time(self):
-#         s = self.secs % 60  # секунды
-#         m = (self.secs // 60) % 60  # минуты
-#         h = (self.secs // 3600) % 24  # часы
-#         return f"{Clock.__get_form(h)}:{Clock.__get_form(m)}:{Clock.__get_form(s)}"
-#
-#     @staticmethod
-#     def __get_form(x):
-#         return str(x) if x > 9 else "0" + str(x)
-#
-#     def __add__(self, other):
-#         if not isinstance(other, Clock):
-#             raise AttributeError("Правый операнд должен быть типом данных Clock")
-#         return Clock(self.secs + other.secs)
-#
-#     def __eq__(self, other):
-#         return self.secs == other.secs
-#         # if self.secs == other.secs:
-#         #     return True
-#         # return False
-#
-#     def __ne__(self, other):
-#         # return self.secs != other.secs
-#         return not self.__eq__(other)
-#
-#     def __le__(self, other):
-#         return self.secs <= other.secs
-#
-#     def __lt__(self, other):
-#         return self.secs < other.secs
-#
-#     def __gt__(self, other):
-#         return self.secs > other.secs
-#
-#     def __ge__(self, other):
-#         return self.secs >= other.secs
-#
-#     def __getitem__(self, item):
-#         if not isinstance(item, str):
-#             raise ValueError("Ключ должен быть строкой")
-#         if item == "hour":
-#             return (self.secs // 3600) % 24
-#         elif item == "min":
-#             return (self.secs // 60) % 60
-#         elif item == "sec":
-#             return self.secs % 60
-#         return "Неверный ключ"
-#
-#     def __setitem__(self, key, value):
-#         if not isinstance(key, str):
-#             raise ValueError("Ключ должен быть строкой")
-#         if not isinstance(value, int):
-#             raise ValueError("Значение должно быть целым числом ")
-#         s = self.secs % 60  # секунды
-#         m = (self.secs // 60) % 60  # минуты
-#         h = (self.secs // 3600) % 24  # часы
-#         if key == "hour":
-#             self.secs = s + 60 * m + value * 3600
-#         elif key == "min":
-#             self.secs = s + 60 * value + h * 3600
-#         elif key == "sec":
-#             self.secs = value + 60 * m + h * 3600
+# # def dec(fn):
+# #     def wrap(*args, **kwargs):
+# #         print("*" * 20)
+# #         fn(*args, **kwargs)
+# #         print("*" * 20)
+# #
+# #     return wrap
+# #
+# #
+# # class Person:
+# #     def __init__(self, name, surname):
+# #         self.name = name
+# #         self.surname = surname
+# #
+# #     @dec
+# #     def info(self):
+# #         print(f"{self.name} {self.surname}")
+# #
+# #
+# # p1 = Person("Виталий", "Карасев")
+# # p1.info()
+# # def decorator(cls):
+# #     class Wrapper(cls):
+# #         def doubler(self, value):
+# #             return value * 2
+# #
+# #     return Wrapper
+# #
+# #
+# # @decorator
+# # class ActualClass:
+# #     def __init__(self):
+# #         print("Init class ActualClass")
+# #
+# #     def quad(self, value):
+# #         return value * 4
+# #
+# #
+# # obj = ActualClass()
+# #
+# # print(obj.quad(4))
+# # print(obj.doubler(4))
 #
 #
-# c1 = Clock(80000)
-# # print(c1.get_format_time())  # 22:13:20
-# c1["hour"] = 10
-# print(c1["hour"], c1["min"], c1["sec"])  # 10 13 20
-
-# c1 = Clock(100)
-# c2 = Clock(100)
-# c3 = Clock(300)
-# print(c1.get_format_time())
-# print(c2.get_format_time())
-# print(c3.get_format_time())
+# # class Message:
+# #     _REGISTRY = {}
+# #
+# #     def __init__(self, text):
+# #         self.text = text
+# #
+# #     @classmethod
+# #     def register(cls, name):
+# #         def decorator(klass):
+# #             cls._REGISTRY[name] = klass
+# #             return klass
+# #
+# #         return decorator
+# #
+# #     @classmethod
+# #     def create(cls, message_type, text):
+# #         klass = cls._REGISTRY.get(message_type)
+# #         if klass is None:
+# #             raise ValueError("Такого мессенджера нет.")
+# #         print(text, end=" ")
+# #
+# #         return klass(text)
+# #
+# #
+# # @Message.register('Telegram')
+# # class TelegramMessage(Message):
+# #     def send(self):
+# #         print("(Telegram)")
+# #
+# #
+# # @Message.register('WhatsApp')
+# # class WhatsAppMessage(Message):
+# #     def send(self):
+# #         print("(WhatsApp)")
+# #
+# #
+# # @Message.register('Viber')
+# # class WhatsAppMessage(Message):
+# #     def send(self):
+# #         print("(Viber)")
+# #
+# #
+# # m1 = Message.create("Telegram", "text")
+# # m1.send()
+# # m2 = Message.create("WhatsApp", "new text")
+# # m2.send()
+# # m3 = Message.create("Viber", "text new text")
+# # m3.send()
 #
-# if c1 == c2:
-#     print("Время равно")
-# if c1 != c3:
-#     print("Время не равно")
 #
-# print("c3 <= c1", c3 <= c1)
-# print("c3 < c1", c3 < c1)
-# print("c3 >= c1", c3 >= c1)
-# print("c3 > c1", c3 > c1)
-
-
+# # class Person:
+# #     def __init__(self, name, surname):
+# #         self.name = name
+# #         self.surname = surname
+# #
+# #     @property
+# #     def name(self):
+# #         return self.__name
+# #
+# #     @name.setter
+# #     def name(self, value):
+# #         self.__name = value
+# #
+# #     @property
+# #     def surname(self):
+# #         return self.__surname
+# #
+# #     @surname.setter
+# #     def surname(self, value):
+# #         self.__surname = value
+# #
+# #
+# # p = Person("Ivan", "Petrov")
+#
+# # class String:
+# #     def __init__(self, value=None):
+# #         if value:
+# #             self.set(value)
+# #
+# #     def set(self, value):
+# #         self.__value = value
+# #
+# #     def get(self):
+# #         return self.__value
+# #
+# #
+# # class Person:
+# #     def __init__(self, name, surname):
+# #         self.name = String(name)
+# #         self.surname = String(surname)
+# #
+# #
+# # p = Person("Ivan", "Petrov")
+# # print(p.name.get())
+# # p.name.set("Viktor")
+# # print(p.name.get())
+#
+#
+# # Дескриптор
+# # __get__()
+# # __set__()
+# # __delete__()
+# # __set_name__()
+# # class ValidString:
+# #     def __set_name__(self, owner, name):
+# #         self.__name = name
+# #
+# #     def __get__(self, instance, owner):
+# #         return instance.__dict__[self.__name]
+# #
+# #     def __set__(self, instance, value):
+# #         if not isinstance(value, str):
+# #             raise ValueError(f"{self.__name} должно быть строкой")
+# #         instance.__dict__[self.__name] = value
+# #
+# #
+# # class Person:
+# #     name = ValidString()
+# #     surname = ValidString()
+# #
+# #     def __init__(self, name, surname):
+# #         self.name = name
+# #         self.surname = surname
+# #
+# #
+# # p = Person("Ivan", "Petrov")
+# # print(p.name)
+# # print(p.surname)
+# # p.surname = "Birukov"
+# # print(p.surname)
+# # class NonNegative:
+# #     def __set_name__(self, owner, name):
+# #         self.name = name
+# #
+# #     def __get__(self, instance, owner):
+# #         return instance.__dict__[self.name]
+# #
+# #     def __set__(self, instance, value):
+# #         if value < 0:
+# #             raise ValueError(f"Значение должно быть положительным")
+# #         instance.__dict__[self.name] = value
+# #
+# #
+# # class Order:
+# #     price = NonNegative()
+# #     quantity = NonNegative()
+# #
+# #     def __init__(self, name, price, quantity):
+# #         self.name = name
+# #         self.price = price
+# #         self.quantity = quantity
+# #
+# #     def total(self):
+# #         return self.price * self.quantity
+# #
+# #
+# # apple = Order("apple", 5, 10)
+# # apple.price = 10
+# # apple.quantity = -20
+# # print(apple.total())
+#
+# # class ReadIntX:
+# #     def __set_name__(self, owner, name):
+# #         self.name = "_x"
+# #
+# #     def __get__(self, instance, owner):
+# #         return getattr(instance, self.name)
+# #
+# #
+# # class Integer:
+# #     @classmethod
+# #     def verify_coord(cls, coord):
+# #         if not isinstance(coord, int) or coord < 0:
+# #             raise TypeError(f"Координата {coord} должна былжна быть целым положительным числом")
+# #
+# #     def __set_name__(self, owner, name):
+# #         self.name = "_" + name
+# #
+# #     def __get__(self, instance, owner):
+# #         return getattr(instance, self.name)  # return instance.__dict__[self.name]
+# #
+# #     def __set__(self, instance, value):
+# #         self.verify_coord(value)
+# #         setattr(instance, self.name, value)       # instance.__dict__[self.name] = value
+# #
+# #
+# # class Point3D:
+# #     x = Integer()
+# #     y = Integer()
+# #     z = Integer()
+# #     xr = ReadIntX()
+# #
+# #     def __init__(self, x, y, z):
+# #         self.x = x
+# #         self.y = y
+# #         self.z = z
+# #
+# #
+# # p1 = Point3D(1, 2, 3)
+# # # print(p1.__dict__)
+# # # p1.y = 3
+# # # print(p1.__dict__)
+# # p1.__dict__["xr"] = 5
+# # p1.xr = -50
+# # print(p1.xr, p1.__dict__)
+#
+#
+# # Метаклассы
+#
+# # a = 5
+# # print(type(a))
+# # print(type(int))
+#
+# # class MyList(list):
+# #     def get_length(self):
+# #         return len(self)
+#
+#
+# # MyList = type(
+# #     'MyList',
+# #     (list,),
+# #     dict(get_length=lambda self: len(self))
+# # )
+# #
+# # lst = MyList()
+# # lst.append(8)
+# # lst.append(2)
+# # lst.append(4)
+# # lst[0] = 3
+# # print(lst, lst.get_length())
+#
+#
+# # class MyMetaclass(type):
+# #     def __new__(mcs, name, bases, attr):
+# #         print("Создание нового объекта", name)
+# #         return super(MyMetaclass, mcs).__new__(mcs, name, bases, attr)
+# #
+# #     def __init__(cls, name, bases, attr):
+# #         print("Инициализация класса", name)
+# #         super(MyMetaclass, cls).__init__(name, bases, attr)
+# #
+# #
+# # class Student(metaclass=MyMetaclass):
+# #     def __init__(self, name):
+# #         self.name = name
+# #
+# #     def get_name(self):
+# #         return self.name
+# #
+# #
+# # stud = Student("Анна")
+# # print(stud.get_name())
+# # print(type(stud))
+# # print(type(Student))
+# # ================================================================
+#
+# # import math
+# #
+# # print(math.pi)
+# #
+# # from math import *
+# #
+# # print(pi)
+#
+# # import geometry.rect
+# # import geometry.sq
+# # import geometry.trian
+# # from geometry import rect, sq, trian
+# # # import geometry
+# # # from geometry import *
+# #
+# #
+# # def main():
+# #     r1 = rect.Rectangle(1, 2)
+# #     r2 = rect.Rectangle(3, 4)
+# #
+# #     s1 = sq.Square(10)
+# #     s2 = sq.Square(20)
+# #
+# #     t1 = trian.Triangle(1, 2, 3)
+# #     t2 = trian.Triangle(5, 6, 7)
+# #
+# #     shape = [r1, r2, s1, s2, t1, t2]
+# #     for g in shape:
+# #         print(g.get_perimetr())
+# #
+# #
+# # if __name__ == "__main__":
+# #     main()
+#
+#
+# # from project.shapes import rectangle
+# # from project.shapes import circle
+# # from project.shapes import cylinder
+# #
+# # rect = [rectangle.Rectangle(3, 7), rectangle.Rectangle(2, 7), rectangle.Rectangle(19, 12)]
+# # circles = [circle.Circle(4), circle.Circle(2), circle.Circle(8)]
+# # cylinders = [cylinder.Cylinder(4, 7), cylinder.Cylinder(2, 5), cylinder.Cylinder(9, 3)]
+# #
+# # circle_max = max(circles, key=lambda c: c.get_circle_square())
+# #
+# # print("*" * 50)
+# # print(f"Окружность с наибольшей площадью: ", end=" ")
+# # circle_max.print_circle()
+# #
+# # rect_min = min(rect, key=lambda r: r.get_rect_perimetr())
+# # print("Прямоугольник с наименьшим периметром: ", end=" ")
+# # rect_min.print_rect()
+# #
+# # c_v = list(map(lambda c: c.get_volume(), cylinders))
+# # c_v_avg = sum(c_v) / len(c_v)
+# #
+# # print(f"Средний объем всех циландров: {c_v_avg:.2f}")
+#
+# import pickle
+#
+# # file_name = 'basket.txt'
+# # shop_list = {
+# #     "фрукты": ("яблоки", "манго"),
+# #     "овощи": ["морковь"],
+# #     "бюджет": 1000
+# # }
+# #
+# # with open(file_name, "wb") as fh:
+# #     pickle.dump(shop_list, fh)
+# #
+# # with open(file_name, "rb") as fh:
+# #     print(pickle.load(fh))
+#
+# # class Test:
+# #     a_number = 35
+# #     a_string = "Привет"
+# #     a_list = [1, 2, 3]
+# #     a_dict = {'фрукты': ('яблоки', 'манго'), 'овощи': ['морковь'], 'бюджет': 1000}
+# #     a_tuple = (22, 35)
+# #
+# #     def __str__(self):
+# #         return f"Число: {Test.a_number}\n" \
+# #                f"Строка: {Test.a_string}\n" \
+# #                f"Список: {Test.a_list}\n" \
+# #                f"Словать: {Test.a_dict}\n" \
+# #                f"Кортеж: {Test.a_tuple}\n"
+# #
+# #
+# # obj = Test()
+# #
+# # my_obj = pickle.dumps(obj)
+# # print(f"Сериализация в строку:\n{my_obj}\n")
+# #
+# # l_obj = pickle.loads(my_obj)
+# # print(f"Десериализация из строки:\n{l_obj}\n")
+#
+# # class Test2:
+# #     def __init__(self):
+# #         self.a = 35
+# #         self.b = "test"
+# #         self.c = lambda x: x * x
+# #
+# #     def __str__(self):
+# #         return f"{self.a} {self.b} {self.c(2)}"
+# #
+# #     def __getstate__(self):
+# #         attr = self.__dict__.copy()
+# #         del attr['c']
+# #         return attr
+# #
+# #     def __setstate__(self, state):
+# #         self.__dict__ = state
+# #         self.c = lambda x: x * x
+# #
+# #
+# # t1 = Test2()
+# # t2 = pickle.dumps(t1)
+# # t3 = pickle.loads(t2)
+# #
+# # print(t3.__dict__)
+# # print(t3)
+#
+# # class TextReader:
+# #     def __init__(self, filename):
+# #         self.filename = filename
+# #         self.file = open(filename)
+# #         self.count = 0
+# #
+# #     def read_line(self):
+# #         self.count += 1
+# #         line = self.file.readline()
+# #         if not line:
+# #             return None
+# #         if line.endswith("\n"):
+# #             line = line[:-1]
+# #         return f"{self.count}: {line}"
+# #
+# #     def __getstate__(self):
+# #         state = self.__dict__.copy()
+# #         del state['file']
+# #         return state
+# #
+# #     def __setstate__(self, state):
+# #         self.__dict__.update(state)
+# #         file = open(self.filename)
+# #         for i in range(self.count):
+# #             file.readline()
+# #         self.file = file
+# #
+# #
+# # reader = TextReader("hello.txt")
+# # print(reader.read_line())
+# # print(reader.read_line())
+# #
+# # new_reader = pickle.loads(pickle.dumps(reader))
+# # print(new_reader.read_line())
+# # print(new_reader.read_line())
+#
+#
+# # data = {
+# #     'name': 'Olga',
+# #     'age': 26,
+# #     'hobbies': ('running', 'singing'),
+# #     'children': [
+# #         {
+# #             'name': "Alice",
+# #             'age': 6
+# #         },
+# #         {
+# #             'name': "Rick",
+# #             'age': 8
+# #         }
+# #     ]
+# # }
+#
+# # with open("data_file.json", "w") as fw:
+# #     json.dump(data, fw, indent=4)
+# #
+# # with open("data_file.json", "r") as fw:
+# #     print(json.load(fw))
+#
+# # json_string = json.dumps(data, sort_keys=True)
+# #
+# # print(json.loads(json_string))
+#
+# # x = {"name": "Виктор"}
+# # y = {"name": "Виктор"}
+# # print(json.dumps(x))
+# # print(json.dumps(y, ensure_ascii=False))
+#
+# # import json
+# # from random import choice
+# #
+# #
+# # def get_person():
+# #     name = ''
+# #     tel = ''
+# #
+# #     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+# #     num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+# #
+# #     while len(name) != 7:
+# #         name += choice(letters)
+# #     # print(name)
+# #
+# #     while len(tel) != 10:
+# #         tel += choice(num)
+# #     # print(tel)
+# #
+# #     person = {
+# #         'name': name,
+# #         'tel': tel
+# #     }
+# #     return person
+# #
+# #
+# # def write_json(person_dict):
+# #     try:
+# #         data = json.load(open("persons.json"))
+# #     except FileNotFoundError:
+# #         data = []
+# #
+# #     data.append(person_dict)
+# #     with open('persons.json', 'w') as f:
+# #         json.dump(data, f, indent=2)
+# #
+# #
+# # for i in range(5):
+# #     write_json(get_person())
+# import json
+#
+#
 # class Student:
 #     def __init__(self, name, marks):
 #         self.name = name
-#         self.marks = list(marks)
-#
-#     def __getitem__(self, item):
-#         if 0 <= item < len(self.marks):
-#             return self.marks[item]
-#         else:
-#             raise IndexError("Неверный индекс")
-#
-#     def __setitem__(self, key, value):
-#         if not isinstance(key, int) or key < 0:
-#             raise TypeError("Индекс должен быть целым неотрицательным числом")
-#
-#         if key >= len(self.marks):
-#             off = key + 1 - len(self.marks)
-#             self.marks.extend([None] * off)
-#
-#         self.marks[key] = value
-#
-#     def __delitem__(self, key):
-#         if not isinstance(key, int):
-#             raise TypeError("Индекс должен быть целым числом")
-#
-#         self.marks[key] = None
-#
-#
-# s1 = Student("Игорь", [5, 5, 3, 4, 5])
-# print(s1[2])
-# s1[10] = 4
-# print(s1[2])
-# del s1[2]
-# print(s1.marks)
-
-# class Point3D:
-#     CH = "Координата должна быть числом"
-#     RIGHT = "Правый операнд должен быть типом Point3D"
-#
-#     def __init__(self, x=0, y=0, z=0):
-#         self.x = x
-#         self.y = y
-#         self.z = z
-#
-#     @staticmethod
-#     def __check_value(v):
-#         return isinstance(v, (int, float))
-#
-#     @staticmethod
-#     def __check0(ex):
-#         if ex.x == 0 or ex.y == 0 or ex.z == 0:
-#             raise ZeroDivisionError("Ни одна из координат второго операнда не должна быть равна 0")
+#         self.marks = marks
 #
 #     def __str__(self):
-#         return f"{self.x}, {self.y}, {self.z}"
+#         a = ''
+#         for i in self.marks:
+#             a += str(i) + ", "
+#         return f"Студент {self.name}: {a[:-2]}"
 #
-#     @property
-#     def x(self):
-#         return self.__x
+#     def add_mark(self, mark):
+#         self.marks.append(mark)
 #
-#     @x.setter
-#     def x(self, value):
-#         if self.__check_value(value):
-#             self.__x = value
-#         else:
-#             print(self.CH)
+#     def delete_mark(self, index):
+#         self.marks.pop(index)
 #
-#     @property
-#     def y(self):
-#         return self.__y
+#     def edit_makr(self, index, new_mark):
+#         self.marks[index] = new_mark
 #
-#     @y.setter
-#     def y(self, value):
-#         if self.__check_value(value):
-#             self.__y = value
-#         else:
-#             print(self.CH)
+#     def averange_mark(self):
+#         return round(sum(self.marks) / len(self.marks), 2)
 #
-#     @property
-#     def z(self):
-#         return self.__z
+#     @classmethod
+#     def dump_to_json(cls, stud, filename):
+#         try:
+#             data = json.load(open(filename))
+#         except FileNotFoundError:
+#             data = []
 #
-#     @z.setter
-#     def z(self, value):
-#         if self.__check_value(value):
-#             self.__z = value
-#         else:
-#             print(self.CH)
+#         data.append({"name": stud.name, "marks": stud.marks})
+#         with open(filename, "w") as f:
+#             json.dump(data, f, indent=2)
 #
-#     def __add__(self, other):
-#         if not isinstance(other, Point3D):
-#             raise ValueError(self.RIGHT)
-#         else:
-#             return Point3D(self.__x + other.x, self.__y + other.y, self.__z + other.z)
-#
-#     def __sub__(self, other):
-#         if not isinstance(other, Point3D):
-#             raise ValueError(self.RIGHT)
-#         else:
-#             return Point3D(self.__x - other.x, self.__y - other.y, self.__z - other.z)
-#
-#     def __mul__(self, other):
-#         if not isinstance(other, Point3D):
-#             raise ValueError(self.RIGHT)
-#         else:
-#             return Point3D(self.__x * other.__x, self.__y * other.__y, self.__z * other.__z)
-#
-#     def __truediv__(self, other):
-#         if not isinstance(other, Point3D):
-#             raise ValueError(self.RIGHT)
-#         self.__check0(other)
-#         return Point3D(self.__x / other.__x, self.__y / other.__y, self.__z / other.__z)
-#
-#     def __eq__(self, other):
-#         if not isinstance(other, Point3D):
-#             raise ValueError(self.RIGHT)
-#         return self.__x == other.__x, self.__y == other.__y, self.__z == other.__z
-#
-#     def __getitem__(self, item):
-#         if not isinstance(item, str):
-#             raise ValueError("Ключ должен быть строкой")
-#         elif item == "x":
-#             return self.__x
-#         elif item == "y":
-#             return self.__y
-#         elif item == "z":
-#             return self.__z
-#         else:
-#             print("Неверное значение ключа")
-#
-#     def __setitem__(self, key, value):
-#         if not isinstance(key, str):
-#             raise ValueError("Ключ должен быть строкой")
-#         if self.__check_value(value):
-#             if key == "x":
-#                 self.__x = value
-#             elif key == "y":
-#                 self.__y = value
-#             elif key == "z":
-#                 self.__z = value
-#         else:
-#             print("Координаты должны быть числами")
+#     @classmethod
+#     def load_from_file(cls, filename):
+#         with open(filename, "r") as f:
+#             print(json.load(f))
 #
 #
-# pt = Point3D(12, 15, 18)
-# # pt2 = Point3D(12, 15, 18)
-# pt2 = Point3D(6, 3, 9)
-# print(f"Координата 1-й точки: {pt}")
-# print(f"Координата 2-й точки: {pt2}")
-#
-# pt3 = pt + pt2
-# print(f"Сложение координат: ({pt3})")
-#
-# pt4 = pt - pt2
-# print(f"Вычитание координат: ({pt4})")
-#
-# pt5 = pt * pt2
-# print(f"Умножение координат: ({pt5})")
-#
-# pt6 = pt / pt2
-# print(f"Деление координат: ({pt6})")
-#
-# print(f"Равенство координат: {pt == pt2}")
-#
-# print("x =", pt['x'], "x1 =", pt2['x'])
-# print("y =", pt['y'], "y1 =", pt2['y'])
-# print("z =", pt['z'], "z1 =", pt2['z'])
-#
-# pt['x'] = 20
-# print(pt['x'])
-
-# Полиморфизм
-
-# class Rectangle:
-#     def __init__(self, w, h):
-#         self.w = w
-#         self.h = h
-#
-#     def get_perimetr(self):
-#         return 2 * (self.w + self.h)
-#
-#
-# class Square:
-#     def __init__(self, a):
-#         self.a = a
-#
-#     def get_perimetr(self):
-#         return 4 * self.a
-#
-#
-# r1 = Rectangle(1, 2)
-# r2 = Rectangle(3, 4)
-# s1 = Square(10)
-# s2 = Square(20)
-#
-# shape = [r1, r2, s1, s2]
-# for g in shape:
-#     print(g.get_perimetr())
-
-# class Number:
-#     def __init__(self, value):
-#         self.value = value
-#
-#     def total(self, a):
-#         return self.value + int(a)
-#
-#
-# class Text:
-#     def __init__(self, value):
-#         self.value = value
-#
-#     def total(self, a):
-#         return len(self.value + str(a))
-#
-#
-# t1 = Number(10)
-# t2 = Text("Python")
-#
-# print(t1.total(35))
-# print(t2.total(35))
-
-# class Cat:
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-#
-#     def info(self):
-#         print(f"Я кот. Меня зовут {self.name}. Мой возраст {self.age}.")
-#
-#     @staticmethod
-#     def make_sound():
-#         print("Пушок мяукает")
-#
-#
-# class Dog:
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-#
-#     def info(self):
-#         print(f"Я собака. Меня зовут {self.name}. Мой возраст {self.age}.")
-#
-#     @staticmethod
-#     def make_sound():
-#         print("Мухтар гавкает")
-#
-#
-# s1 = Cat("Пушок", 2.5)
-# s2 = Dog("Мухтар", 4)
-#
-# s = [s1, s2]
-#
-# for i in s:
-#     i.info()
-#     i.make_sound()
-
-# class Human:
-#     def __init__(self, name, surname, age):
-#         self.name = name
-#         self.surname = surname
-#         self.age = age
-#
-#     def info(self):
-#         print(f"{self.name} {self.surname} {self.age}")
-#
-#
-# class Student(Human):
-#     def __init__(self, speciality, group, rating, name, surname, age):
-#         super().__init__(name, surname, age)
-#         self.speciality = speciality
+# class Group:
+#     def __init__(self, students, group):
+#         self.students = students
 #         self.group = group
-#         self.rating = rating
-#
-#     def info(self):
-#         print(f"{self.speciality} {self.group} {self.rating}", end=" ")
-#         super().info()
-#
-#
-# class Teacher(Human):
-#     def __init__(self, speciality, experience, name, surname, age):
-#         super().__init__(name, surname, age)
-#         self.speciality = speciality
-#         self.experience = experience
-#
-#     def info(self):
-#         print(f"{self.speciality} {self.experience}", end=" ")
-#         super().info()
-#
-#
-# class Graduate(Student):
-#     def __init__(self, topic, speciality, group, rating, name, surname, age):
-#         super().__init__(speciality, group, rating, name, surname, age)
-#         self.topic = topic
-#
-#     def info(self):
-#         print(f"{self.topic}", end=" ")
-#         super().info()
-#
-#
-# groups = [
-#     Student("Батодалаев", "Даши", 16, "ГК", "Web_011", 5),
-#     Student("Загидуллин", "Линар", 32, "РПО", "PD_011", 5),
-#     Graduate("Шугани", "Сергей", 15, "РПО", "PD_011", 5, "Защита персональных данных"),
-#     Teacher("Башкиров", "Алексей", 45, "Разработка приложений", 20)
-# ]
-#
-# for i in groups:
-#     i.info()
-
-# class Cat:
-#     def __init__(self, name):
-#         self.name = name
-#
-#     def __repr__(self):
-#         return f"{self.__class__}: {self.name}"
 #
 #     def __str__(self):
-#         return f"{self.name}"
-#
-#
-# cat = Cat("Пушок")
-# print(cat)
-
-# class Point:
-#     def __init__(self, *args):
-#         self.coords = args
-#         print(self.coords)
-#
-#     def __len__(self):
-#         return len(self.coords)
-#
-#     def __abs__(self):
-#         return list(map(abs, self.coords))
-#
-#
-# p = Point(1, -8, 9)
-# print(len(p))
-# print(abs(p))
-# import math
-#
-#
-# class Point:
-#     __slots__ = ('x', 'y', '__length')
-#
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#         self.length = math.sqrt(x * x + y * y)
-#
-#     @property
-#     def length(self):
-#         return self.__length
-#
-#     @length.setter
-#     def length(self, value):
-#         self.__length = value
-#
-#
-# pt = Point(1, 2)
-# print(pt.length)
-# pt.z = 10
-# print(pt.__dict__)
-
-# class Point:
-#     __slots__ = ('x', 'y')
-#
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-
-
-# class Point2D:
-#
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#
-#
-# pt = Point(1, 2)
-# pt2 = Point2D(1, 2)
-# print("pt =", pt.__sizeof__())
-# print("pt2 =", pt2.__sizeof__() + pt2.__dict__.__sizeof__())
-
-# class Point:
-#     __slots__ = ('x', 'y')
-#
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#
-#
-# class Point3D(Point):
-#     __slots__ = 'z',
-#
-#     def __init__(self, x, y, z):
-#         super().__init__(x, y)
-#         self.z = z
-#
-#
-# pt3 = Point3D(10, 20, 40)
-# pt3.x = 30
-# print(pt3.x, pt3.y, pt3.z)
-# print(pt3.__dict__)
-
-# class MyDecorator:
-#     def __init__(self, func):
-#         self.func = func
-#
-#     def __call__(self, a, b):
-#         # print("перед вызовом функции")
-#         res = self.func(a, b) ** 2
-#         # print("после вызова функции")
-#         return res
-#
-# @MyDecorator
-# def function(a, b):
-#     return a * b
-#
-#
-# print(function(2, 3))
-
-# class Counter:
-#     def __init__(self):
-#         self.counter = 0
-#
-#     def __call__(self, *args, **kwargs):
-#         self.counter += 1
-#         print(self.counter)
-#
-#
-# c1 = Counter()
-# c1()
-# c1()
-# c1()
-# c2 = Counter()
-# c2()
-# c2()
-
-# class StripChars:
-#     def __init__(self, chars):
-#         self.chars = chars
-#
-#     def __call__(self, string):
-#         if not isinstance(string, str):
-#             raise ValueError("Аргумент должен быть строкой")
-#
-#         return string.strip(self.chars)
-#
-# # Функтор
-# s1 = StripChars("?:!.; ")
-# print(s1("   ?  Hello. world  !      "))
-# print(s1("world  : ;      "))
-#
-#
-# def string_strip(chars):
-#     def wrap(string):
-#         if not isinstance(string, str):
-#             raise ValueError("Аргумент должен быть строкой")
-#         return string.strip(chars)
-#     return wrap
-#
-#
-# s1 = string_strip("?:!.; ")
-# print(s1("   ?  Hello. world  !      "))
-
-
-# class MyDecorator:
-#     def __init__(self, func):
-#         self.func = func
-#
-#     def __call__(self, *args, **kwargs):
-#         print("перед вызовом функции")
-#         res = self.func(*args, **kwargs)
-#         print("после вызова функции")
-#         return res
-#
-#
-# @MyDecorator
-# def function(a, b):
-#     return a * b
-#
-#
-# @MyDecorator
-# def function1(a, b, c):
-#     return a * b * c
-#
-#
-# @MyDecorator
-# def function3(a, b, c, d):
-#     return a * b * c * d
-#
-#
-# print(function(2, 3))
-# print(function1(2, 3, 2))
-# print(function3(2, 3, 2, 5))
-
-# class MyDecorator:
-#     def __init__(self, arg):
-#         self.name = arg
-#
-#     def __call__(self, func):
-#         def wrap(*args, **kwargs):
-#             print("перед вызовом функции")
-#             print(self.name)
-#             func(*args, **kwargs)
-#             print("после вызова функции")
-#
-#         return wrap
-#
-#
-# @MyDecorator("test2")
-# def function(a, b):
-#     print(a, b)
-#
-#
-# function(2, 5)
-
-# class Power:
-#     def __init__(self, arg):
-#         self.name = arg
-#
-#     def __call__(self, func):
-#         def wrap(*args, **kwargs):
-#             res = func(*args, **kwargs)
-#             return res ** self.name
-#
-#         return wrap
-#
-#
-# @Power(5)
-# def function(a, b):
-#     return a * b
-#
-#
-# print(function(2, 2))
-
-# def dec(fn):
-#     def wrap(*args, **kwargs):
-#         print("*" * 20)
-#         fn(*args, **kwargs)
-#         print("*" * 20)
-#
-#     return wrap
-#
-#
-# class Person:
-#     def __init__(self, name, surname):
-#         self.name = name
-#         self.surname = surname
-#
-#     @dec
-#     def info(self):
-#         print(f"{self.name} {self.surname}")
-#
-#
-# p1 = Person("Виталий", "Карасев")
-# p1.info()
-# def decorator(cls):
-#     class Wrapper(cls):
-#         def doubler(self, value):
-#             return value * 2
-#
-#     return Wrapper
-#
-#
-# @decorator
-# class ActualClass:
-#     def __init__(self):
-#         print("Init class ActualClass")
-#
-#     def quad(self, value):
-#         return value * 4
-#
-#
-# obj = ActualClass()
-#
-# print(obj.quad(4))
-# print(obj.doubler(4))
-
-
-# class Message:
-#     _REGISTRY = {}
-#
-#     def __init__(self, text):
-#         self.text = text
+#         a = ''
+#         for i in self.students:
+#             a += str(i) + "\n"
+#         return f"Группа: {self.group}\n{a}"
+#
+#     def add_student(self, student):
+#         self.students.append(student)
+#
+#     def remove_student(self, index):
+#         return self.students.pop(index)
 #
 #     @classmethod
-#     def register(cls, name):
-#         def decorator(klass):
-#             cls._REGISTRY[name] = klass
-#             return klass
-#
-#         return decorator
+#     def change_group(cls, group1, group2, index):
+#         return group2.add_student(group1.remove_student(index))
 #
 #     @classmethod
-#     def create(cls, message_type, text):
-#         klass = cls._REGISTRY.get(message_type)
-#         if klass is None:
-#             raise ValueError("Такого мессенджера нет.")
-#         print(text, end=" ")
+#     def dump_group(cls, file, group):
+#         try:
+#             data = json.load(open(file))
+#         except FileNotFoundError:
+#             data = []
 #
-#         return klass(text)
+#         with open(file, 'w') as f:
+#             stud_list = []
+#             for i in group.students:
+#                 stud_list.append([i.name, i.marks])
+#             tmp = {"Students": stud_list}
+#             data.append(tmp["Students"])
+#             json.dump(data, f, indent=2)
 #
-#
-# @Message.register('Telegram')
-# class TelegramMessage(Message):
-#     def send(self):
-#         print("(Telegram)")
-#
-#
-# @Message.register('WhatsApp')
-# class WhatsAppMessage(Message):
-#     def send(self):
-#         print("(WhatsApp)")
-#
-#
-# @Message.register('Viber')
-# class WhatsAppMessage(Message):
-#     def send(self):
-#         print("(Viber)")
-#
-#
-# m1 = Message.create("Telegram", "text")
-# m1.send()
-# m2 = Message.create("WhatsApp", "new text")
-# m2.send()
-# m3 = Message.create("Viber", "text new text")
-# m3.send()
-
-
-# class Person:
-#     def __init__(self, name, surname):
-#         self.name = name
-#         self.surname = surname
-#
-#     @property
-#     def name(self):
-#         return self.__name
-#
-#     @name.setter
-#     def name(self, value):
-#         self.__name = value
-#
-#     @property
-#     def surname(self):
-#         return self.__surname
-#
-#     @surname.setter
-#     def surname(self, value):
-#         self.__surname = value
-#
-#
-# p = Person("Ivan", "Petrov")
-
-# class String:
-#     def __init__(self, value=None):
-#         if value:
-#             self.set(value)
-#
-#     def set(self, value):
-#         self.__value = value
-#
-#     def get(self):
-#         return self.__value
-#
-#
-# class Person:
-#     def __init__(self, name, surname):
-#         self.name = String(name)
-#         self.surname = String(surname)
-#
-#
-# p = Person("Ivan", "Petrov")
-# print(p.name.get())
-# p.name.set("Viktor")
-# print(p.name.get())
-
-
-# Дескриптор
-# __get__()
-# __set__()
-# __delete__()
-# __set_name__()
-# class ValidString:
-#     def __set_name__(self, owner, name):
-#         self.__name = name
-#
-#     def __get__(self, instance, owner):
-#         return instance.__dict__[self.__name]
-#
-#     def __set__(self, instance, value):
-#         if not isinstance(value, str):
-#             raise ValueError(f"{self.__name} должно быть строкой")
-#         instance.__dict__[self.__name] = value
-#
-#
-# class Person:
-#     name = ValidString()
-#     surname = ValidString()
-#
-#     def __init__(self, name, surname):
-#         self.name = name
-#         self.surname = surname
-#
-#
-# p = Person("Ivan", "Petrov")
-# print(p.name)
-# print(p.surname)
-# p.surname = "Birukov"
-# print(p.surname)
-# class NonNegative:
-#     def __set_name__(self, owner, name):
-#         self.name = name
-#
-#     def __get__(self, instance, owner):
-#         return instance.__dict__[self.name]
-#
-#     def __set__(self, instance, value):
-#         if value < 0:
-#             raise ValueError(f"Значение должно быть положительным")
-#         instance.__dict__[self.name] = value
-#
-#
-# class Order:
-#     price = NonNegative()
-#     quantity = NonNegative()
-#
-#     def __init__(self, name, price, quantity):
-#         self.name = name
-#         self.price = price
-#         self.quantity = quantity
-#
-#     def total(self):
-#         return self.price * self.quantity
-#
-#
-# apple = Order("apple", 5, 10)
-# apple.price = 10
-# apple.quantity = -20
-# print(apple.total())
-
-# class ReadIntX:
-#     def __set_name__(self, owner, name):
-#         self.name = "_x"
-#
-#     def __get__(self, instance, owner):
-#         return getattr(instance, self.name)
-#
-#
-# class Integer:
 #     @classmethod
-#     def verify_coord(cls, coord):
-#         if not isinstance(coord, int) or coord < 0:
-#             raise TypeError(f"Координата {coord} должна былжна быть целым положительным числом")
-#
-#     def __set_name__(self, owner, name):
-#         self.name = "_" + name
-#
-#     def __get__(self, instance, owner):
-#         return getattr(instance, self.name)  # return instance.__dict__[self.name]
-#
-#     def __set__(self, instance, value):
-#         self.verify_coord(value)
-#         setattr(instance, self.name, value)       # instance.__dict__[self.name] = value
+#     def upload_jornal(cls, filename):
+#         with open(filename, "r") as f:
+#             print(json.load(f))
 #
 #
-# class Point3D:
-#     x = Integer()
-#     y = Integer()
-#     z = Integer()
-#     xr = ReadIntX()
+# st1 = Student("Bodnya", [5, 4, 3, 4, 5, 3])
+# st2 = Student("Nikolaenko", [2, 3, 5, 4, 2])
+# st3 = Student("Birukov", [3, 5, 3, 2, 5, 4])
+# sts = [st1, st2]
+# my_group = Group(sts, "ГК Python")
+# print(my_group)
+# my_group.add_student(st3)
+# print(my_group)
+# my_group.remove_student(1)
+# print(my_group)
+# group22 = [st2]
+# my_group2 = Group(group22, "ГК Web")
+# print(my_group2)
+# Group.change_group(my_group, my_group2, 0)
+# print("*" * 20)
+# print(my_group)
+# print(my_group2)
+# # Student.dump_to_json(st1, "student.json")
+# # Student.dump_to_json(st2, "student.json")
+# # Student.load_from_file("student.json")
 #
-#     def __init__(self, x, y, z):
-#         self.x = x
-#         self.y = y
-#         self.z = z
-#
-#
-# p1 = Point3D(1, 2, 3)
-# # print(p1.__dict__)
-# # p1.y = 3
-# # print(p1.__dict__)
-# p1.__dict__["xr"] = 5
-# p1.xr = -50
-# print(p1.xr, p1.__dict__)
+# Group.dump_group("group.json", my_group2)
+# Group.dump_group("group.json", my_group)
+# Group.upload_jornal("group.json")
 
 
-# Метаклассы
+# import requests
+# import json
+#
+# response = requests.get("https://jsonplaceholder.typicode.com/todos")
+# todos = json.loads(response.text)
+# # print(todos[:10])
+#
+# todos_by_user = {}
+#
+# for todo in todos:
+#     if todo["completed"]:
+#         try:
+#             todos_by_user[todo["userId"]] += 1  # {1: 3, 2: 2}
+#         except KeyError:
+#             todos_by_user[todo["userId"]] = 1
+# print(todos_by_user)
+#
+# top_users = sorted(todos_by_user.items(), key=lambda x: x[1], reverse=True)
+# print(top_users)
+#
+# max_completed = top_users[0][1]
+#
+# users = []
+# for user, num_complete in top_users:
+#     if num_complete < max_completed:
+#         break
+#     users.append(str(user))
+# print(users)
+#
+# max_users = " and ".join(users)
+# s = "s" if len(users) > 1 else ""
+# print(f"user{s} {max_users} completed {max_completed} TODOs")
+#
+#
+# def keep(t):
+#     is_completed = t["completed"]
+#     has_max_count = str(t["userId"]) in users
+#     return is_completed and has_max_count
+#
+#
+# with open("filter.json", "w") as f:
+#     filtered_todos = list(filter(keep, todos))
+#     json.dump(filtered_todos, f, indent=2)
+#
+# with open("filter.json", "r") as f:
+#     print(json.load(f))
 
-# a = 5
-# print(type(a))
-# print(type(int))
-
-# class MyList(list):
-#     def get_length(self):
-#         return len(self)
+import csv
 
 
-# MyList = type(
-#     'MyList',
-#     (list,),
-#     dict(get_length=lambda self: len(self))
-# )
+# with open("data.csv") as f:
+#     reader = csv.reader(f, delimiter=",")
+#     count = 0
 #
-# lst = MyList()
-# lst.append(8)
-# lst.append(2)
-# lst.append(4)
-# lst[0] = 3
-# print(lst, lst.get_length())
+#     for row in reader:
+#         if count == 0:
+#             print(f"Файл содержит столбцы: {', '.join(row)}")
+#         else:
+#             print(f"\t{row[0]} - {row[1]}. Родился в {row[2]} году.")
+#         count += 1
+#     print(f"Всего в файле {count} строки.")
+
+# with open('data2.csv', encoding="utf-8") as f:
+#     reader = csv.reader(f, delimiter=";")
+#     for row in reader:
+#         print(row)
+
+# with open("data.csv") as f:
+#     fn = ['Имя', 'Профессия', 'Год рождения']
+#     reader = csv.DictReader(f, delimiter=",", fieldnames=fn)
+#     count = 0
+#
+#     for row in reader:
+#         if count == 0:
+#             print(f"Файл содержит столбцы: {', '.join(row)}")
+#         print(f"\t{row['Имя']} - {row['Профессия']}. Родился в {row['Год рождения']} году.")
+#         count += 1
+#     print(f"Всего в файле {count} строки.")
+
+# with open("student.csv", mode="w") as f:
+#     writer = csv.writer(f, delimiter=",", lineterminator="\r")
+#     writer.writerow(["Имя", "Класс", "Возраст"])
+#     writer.writerow(["Женя", "9", "15"])
+#     writer.writerow(["Саша", "5", "12"])
+#     writer.writerow(["Маша", "11", "18"])
+
+# data = [['hostname', 'vendor', 'model', 'location'],
+#         ['sw1', 'Cisco', '3750', 'London, Best str'],
+#         ['sw2', 'Cisco', '3850', 'Liverpool, Better str'],
+#         ['sw3', 'Cisco', '3650', 'Liverpool, Better str'],
+#         ['sw4', 'Cisco', '3650', 'London, Best str']]
+
+# with open("sw_data.csv", "w") as f:
+#     writer = csv.writer(f, lineterminator="\r", quoting=csv.QUOTE_NONNUMERIC)
+#     for row in data:
+#         writer.writerow(row)
+#
+# with open("sw_data.csv") as f:
+#     print(f.read())
+
+# with open("student1.csv", mode="w") as f:
+#     names = ["Имя", "Возраст"]
+#     writer = csv.DictWriter(f, lineterminator="\r", fieldnames=names)
+#     writer.writeheader()
+#     writer.writerow({"Имя": "Саша", "Возраст": "6"})
+#     writer.writerow({"Имя": "Маша", "Возраст": "15"})
+#     writer.writerow({"Имя": "Вова", "Возраст": "14"})
 
 
-# class MyMetaclass(type):
-#     def __new__(mcs, name, bases, attr):
-#         print("Создание нового объекта", name)
-#         return super(MyMetaclass, mcs).__new__(mcs, name, bases, attr)
+# data = [{
+#     'hostname': 'sw1',
+#     'location': 'London',
+#     'model': '3750',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw2',
+#     'location': 'Liverpool',
+#     'model': '3850',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw3',
+#     'location': 'Liverpool',
+#     'model': '3650',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw4',
+#     'location': 'London',
+#     'model': '3650',
+#     'vendor': 'Cisco'
+# }]
 #
-#     def __init__(cls, name, bases, attr):
-#         print("Инициализация класса", name)
-#         super(MyMetaclass, cls).__init__(name, bases, attr)
+# with open("dw.csv", "w") as f:
+#     writer = csv.DictWriter(f, fieldnames=list(data[0].keys()), lineterminator="\r")
+#     writer.writeheader()
+#     for d in data:
+#         writer.writerow(d)
+# ======================================================
+# import re
 #
-#
-# class Student(metaclass=MyMetaclass):
-#     def __init__(self, name):
-#         self.name = name
-#
-#     def get_name(self):
-#         return self.name
-#
-#
-# stud = Student("Анна")
-# print(stud.get_name())
-# print(type(stud))
-# print(type(Student))
-# ================================================================
+# from bs4 import BeautifulSoup
 
-# import math
-#
-# print(math.pi)
-#
-# from math import *
-#
-# print(pi)
+# def get_copywriter(tag):
+#     whois = tag.find("div", class_="whois")
+#     if "Copywriter" in whois:
+#         return tag
+#     return None
 
-# import geometry.rect
-# import geometry.sq
-# import geometry.trian
-# from geometry import rect, sq, trian
-# # import geometry
-# # from geometry import *
+# def get_salary(s):
+#     pattern = r"\d+"
+#     # res = re.findall(pattern, s)[0]
+#     res = re.search(pattern, s).group()
+#     print(res)
+#
+#
+# f = open('index.html', encoding="utf-8").read()
+# soup = BeautifulSoup(f, "html.parser")
+# row = soup.find("div", class_="name")
+# row = soup.find_all("div", class_="row")[1].find_all("div", class_="links")
+# row = soup.find_all("div", {"class": "name"})
+# row = soup.find_all("div", {"data-set": "salary"})
+# row = soup.find("div", text="Alena").find_parent(class_="row")
+# row = soup.find("div", id="whois3").find_next_sibling()
+# row = soup.find("div", id="whois3").find_previous_sibling()
+# copywriter = []
+# row = soup.find_all("div", class_="row")
+# for i in row:
+#     cw = get_copywriter(i)
+#     if cw:
+#         copywriter.append(cw)
+# print(copywriter)
+# salary = soup.find_all("div", {"data-set": "salary"})  #
+# for i in salary:
+#     get_salary(i.text)
+# print(salary)
+
+# import requests
+
+
+# r = requests.get("https://ru.wordpress.org/")
+# # print(r.status_code)
+# # print(r.headers["content-type"])
+# # print(r.headers)
+# # r.encoding = "utf-8"
+# print(r.text)
+# import requests
+# import re
+# import csv
+# from bs4 import BeautifulSoup
+#
+#
+# def get_html(url):
+#     r = requests.get(url)
+#     return r.text
+#
+#
+# def refined(s):
+#     res = re.sub(r"\D+", "", s)
+#     return res
+#
+#
+# def write_csv(data):
+#     with open('plugins.csv', "a") as f:
+#         writer = csv.writer(f)
+#         writer.writerow((data['name'], data['url'], data['rating']))
+#
+#
+# def get_data(html):
+#     soup = BeautifulSoup(html, "lxml")
+#     p1 = soup.find_all("section", class_="plugin-section")[1]
+#     plugins = p1.find_all('article')
+#     for plugin in plugins:
+#         name = plugin.find("h3").text
+#         url = plugin.find("h3").find("a").get('href')
+#         rating = plugin.find("span", class_="rating-count").find("a").text
+#         r = refined(rating)
+#
+#         data = {"name": name, "url": url, "rating": r}
+#         write_csv(data)
 #
 #
 # def main():
-#     r1 = rect.Rectangle(1, 2)
-#     r2 = rect.Rectangle(3, 4)
-#
-#     s1 = sq.Square(10)
-#     s2 = sq.Square(20)
-#
-#     t1 = trian.Triangle(1, 2, 3)
-#     t2 = trian.Triangle(5, 6, 7)
-#
-#     shape = [r1, r2, s1, s2, t1, t2]
-#     for g in shape:
-#         print(g.get_perimetr())
+#     url = "https://ru.wordpress.org/plugins/"
+#     get_data(get_html(url))
 #
 #
 # if __name__ == "__main__":
 #     main()
 
 
-# from project.shapes import rectangle
-# from project.shapes import circle
-# from project.shapes import cylinder
+# import requests
+# import csv
+# from bs4 import BeautifulSoup
 #
-# rect = [rectangle.Rectangle(3, 7), rectangle.Rectangle(2, 7), rectangle.Rectangle(19, 12)]
-# circles = [circle.Circle(4), circle.Circle(2), circle.Circle(8)]
-# cylinders = [cylinder.Cylinder(4, 7), cylinder.Cylinder(2, 5), cylinder.Cylinder(9, 3)]
 #
-# circle_max = max(circles, key=lambda c: c.get_circle_square())
+# def get_html(url):
+#     r = requests.get(url)
+#     return r.text
 #
-# print("*" * 50)
-# print(f"Окружность с наибольшей площадью: ", end=" ")
-# circle_max.print_circle()
 #
-# rect_min = min(rect, key=lambda r: r.get_rect_perimetr())
-# print("Прямоугольник с наименьшим периметром: ", end=" ")
-# rect_min.print_rect()
+# def refine_cy(s):
+#     return s.split(" ")[-1]
 #
-# c_v = list(map(lambda c: c.get_volume(), cylinders))
-# c_v_avg = sum(c_v) / len(c_v)
 #
-# print(f"Средний объем всех циландров: {c_v_avg:.2f}")
+# def write_csv(data):
+#     with open('plugins1.csv', 'a', encoding="utf-8") as f:
+#         writer = csv.writer(f)
+#         writer.writerow((data['name'], data['url'], data['testing']))
+#
+#
+# def get_page_data(html):
+#     soup = BeautifulSoup(html, "lxml")
+#     elements = soup.find_all("article", class_="plugin-card")
+#     for el in elements:
+#         try:
+#             name = el.find("h3").text
+#         except ValueError:
+#             name = ''
+#         try:
+#             url = el.find("h3").find("a").get('href')
+#         except ValueError:
+#             url = ''
+#         try:
+#             c = el.find("span", class_="tested-with").text.strip()
+#             cy = refine_cy(c)
+#         except ValueError:
+#             cy = ''
+#         data = {"name": name,
+#                 "url": url,
+#                 "testing": cy
+#                 }
+#         write_csv(data)
+#
+#
+# def main():
+#     for i in range(24, 26):
+#         url = f"https://ru.wordpress.org/plugins/browse/blocks/page/{i}/"
+#         get_page_data(get_html(url))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
-import pickle
+# from parse import Parser
+#
+#
+# def main():
+#     pars = Parser("https://www.ixbt.com/live/index/type/news/", "news.txt")
+#     pars.run()
+#
+#
+# if __name__ == "__main__":
+#     main()
+# x = 1
+# y = 2
+# z = 3
+# a = [x, y, z]
+#
+# print("a", id(a))
+# print("a[0]", id(a[0]))
+# print("x =", id(x))
+# print("a[1]", id(a[1]))
+# print("a[2]", id(a[2]))
 
-# file_name = 'basket.txt'
-# shop_list = {
-#     "фрукты": ("яблоки", "манго"),
-#     "овощи": ["морковь"],
-#     "бюджет": 1000
-# }
-#
-# with open(file_name, "wb") as fh:
-#     pickle.dump(shop_list, fh)
-#
-# with open(file_name, "rb") as fh:
-#     print(pickle.load(fh))
+class Node:
+    def __init__(self, elem):
+        self.__data = elem  # элемент
+        self.__next = None  # ссылка на следующий узел
 
-# class Test:
-#     a_number = 35
-#     a_string = "Привет"
-#     a_list = [1, 2, 3]
-#     a_dict = {'фрукты': ('яблоки', 'манго'), 'овощи': ['морковь'], 'бюджет': 1000}
-#     a_tuple = (22, 35)
-#
-#     def __str__(self):
-#         return f"Число: {Test.a_number}\n" \
-#                f"Строка: {Test.a_string}\n" \
-#                f"Список: {Test.a_list}\n" \
-#                f"Словать: {Test.a_dict}\n" \
-#                f"Кортеж: {Test.a_tuple}\n"
-#
-#
-# obj = Test()
-#
-# my_obj = pickle.dumps(obj)
-# print(f"Сериализация в строку:\n{my_obj}\n")
-#
-# l_obj = pickle.loads(my_obj)
-# print(f"Десериализация из строки:\n{l_obj}\n")
+    def get_data(self):
+        return self.__data
 
-# class Test2:
-#     def __init__(self):
-#         self.a = 35
-#         self.b = "test"
-#         self.c = lambda x: x * x
-#
-#     def __str__(self):
-#         return f"{self.a} {self.b} {self.c(2)}"
-#
-#     def __getstate__(self):
-#         attr = self.__dict__.copy()
-#         del attr['c']
-#         return attr
-#
-#     def __setstate__(self, state):
-#         self.__dict__ = state
-#         self.c = lambda x: x * x
-#
-#
-# t1 = Test2()
-# t2 = pickle.dumps(t1)
-# t3 = pickle.loads(t2)
-#
-# print(t3.__dict__)
-# print(t3)
+    def get_next(self):
+        return self.__next
 
-# class TextReader:
-#     def __init__(self, filename):
-#         self.filename = filename
-#         self.file = open(filename)
-#         self.count = 0
-#
-#     def read_line(self):
-#         self.count += 1
-#         line = self.file.readline()
-#         if not line:
-#             return None
-#         if line.endswith("\n"):
-#             line = line[:-1]
-#         return f"{self.count}: {line}"
-#
-#     def __getstate__(self):
-#         state = self.__dict__.copy()
-#         del state['file']
-#         return state
-#
-#     def __setstate__(self, state):
-#         self.__dict__.update(state)
-#         file = open(self.filename)
-#         for i in range(self.count):
-#             file.readline()
-#         self.file = file
-#
-#
-# reader = TextReader("hello.txt")
-# print(reader.read_line())
-# print(reader.read_line())
-#
-# new_reader = pickle.loads(pickle.dumps(reader))
-# print(new_reader.read_line())
-# print(new_reader.read_line())
+    def set_data(self, new_data):
+        self.__data = new_data
+
+    def set_next(self, new_next):
+        self.__next = new_next
 
 
-# data = {
-#     'name': 'Olga',
-#     'age': 26,
-#     'hobbies': ('running', 'singing'),
-#     'children': [
-#         {
-#             'name': "Alice",
-#             'age': 6
-#         },
-#         {
-#             'name': "Rick",
-#             'age': 8
-#         }
-#     ]
-# }
+class LinkedList:
+    def __init__(self):
+        self.head = None
 
-# with open("data_file.json", "w") as fw:
-#     json.dump(data, fw, indent=4)
-#
-# with open("data_file.json", "r") as fw:
-#     print(json.load(fw))
+    def list_print(self):
+        val = self.head
+        while val:  # val is not None
+            print(val.get_data(), end=" ")
+            val = val.get_next()
+        print()
 
-# json_string = json.dumps(data, sort_keys=True)
-#
-# print(json.loads(json_string))
+    def add(self, item):
+        tmp = Node(item)  # создаем элемент
+        tmp.set_next(self.head)  # прикрепляем новый элемент к списку
+        self.head = tmp  # адрес нового элемента помещаем в голову
 
-# x = {"name": "Виктор"}
-# y = {"name": "Виктор"}
-# print(json.dumps(x))
-# print(json.dumps(y, ensure_ascii=False))
+    def append(self, item):
+        new_item = Node(item)
+        if self.head is None:
+            self.head = new_item
+            return
 
-# import json
-# from random import choice
-#
-#
-# def get_person():
-#     name = ''
-#     tel = ''
-#
-#     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-#     num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-#
-#     while len(name) != 7:
-#         name += choice(letters)
-#     # print(name)
-#
-#     while len(tel) != 10:
-#         tel += choice(num)
-#     # print(tel)
-#
-#     person = {
-#         'name': name,
-#         'tel': tel
-#     }
-#     return person
-#
-#
-# def write_json(person_dict):
-#     try:
-#         data = json.load(open("persons.json"))
-#     except FileNotFoundError:
-#         data = []
-#
-#     data.append(person_dict)
-#     with open('persons.json', 'w') as f:
-#         json.dump(data, f, indent=2)
-#
-#
-# for i in range(5):
-#     write_json(get_person())
-import json
+        end = self.head
+        while end.get_next():  # доходим до последнего элемента
+            end = end.get_next()
+        end.set_next(new_item)
+
+    def size(self):
+        current = self.head
+        count = 0
+        while current is not None:
+            count = count + 1
+            current = current.get_next()
+        return count
+
+    def insert(self, position, item):
+        if position > self.size():
+            raise IndexError("Индекс находится за пределами списка.")
+
+        current = self.head
+        previous = None
+        pos = 0
+        if position == 0:
+            self.add(item)
+            return
+        else:
+            new_node = Node(item)
+            while pos < position:
+                pos += 1
+                previous = current
+                current = current.get_next()
+            previous.set_next(new_node)
+            new_node.set_next(current)
+
+    def search(self, item):  # поиск по значению
+        current = self.head
+        found = False
+        while current is not None and not found:
+            if current.get_data() == item:
+                found = True
+            else:
+                current = current.get_next()
+        return found
 
 
-class Student:
-    def __init__(self, name, marks):
-        self.name = name
-        self.marks = marks
+# temp = Node(93)
+# print(temp.get_data())
 
-    def __str__(self):
-        a = ''
-        for i in self.marks:
-            a += str(i) + ", "
-        return f"Студент {self.name}: {a[:-2]}"
+temp = LinkedList()
+temp.head = Node(93)
+temp.list_print()
+temp.add(31)
+temp.add(77)
+temp.list_print()
 
-    def add_mark(self, mark):
-        self.marks.append(mark)
-
-    def delete_mark(self, index):
-        self.marks.pop(index)
-
-    def edit_makr(self, index, new_mark):
-        self.marks[index] = new_mark
-
-    def averange_mark(self):
-        return round(sum(self.marks) / len(self.marks), 2)
-
-    @classmethod
-    def dump_to_json(cls, stud, filename):
-        try:
-            data = json.load(open(filename))
-        except FileNotFoundError:
-            data = []
-
-        data.append({"name": stud.name, "marks": stud.marks})
-        # print("-> ", data)
-        with open(filename, "w") as f:
-            json.dump(data, f, indent=2)
-
-    @classmethod
-    def load_from_file(cls, filename):
-        with open(filename, "r") as f:
-            print(json.load(f))
-
-
-class Group:
-    def __init__(self, students, group):
-        self.students = students
-        self.group = group
-
-    def __str__(self):
-        a = ''
-        for i in self.students:
-            a += str(i) + "\n"
-        return f"Группа: {self.group}\n{a}"
-
-    def add_student(self, student):
-        self.students.append(student)
-
-    def remove_student(self, index):
-        return self.students.pop(index)
-
-    @classmethod
-    def change_group(cls, group1, group2, index):
-        return group2.add_student(group1.remove_student(index))
-
-    @classmethod
-    def dump_group(cls, file, group):
-        try:
-            data = json.load(open(file))
-        except FileNotFoundError:
-            data = []
-
-        with open(file, 'w') as f:
-            stud_list = []
-            for i in group.students:
-                stud_list.append([i.name, i.marks])
-            tmp = {"Students": stud_list}
-            data.append(tmp["Students"])
-            json.dump(data, f)
-
-    @classmethod
-    def upload_jornal(cls, filename):
-        with open(filename, "r") as f:
-            print(json.load(f))
-
-
-st1 = Student("Bodnya", [5, 4, 3, 4, 5, 3])
-st2 = Student("Nikolaenko", [2, 3, 5, 4, 2])
-st3 = Student("Birukov", [3, 5, 3, 2, 5, 4])
-sts = [st1, st2]
-my_group = Group(sts, "ГК Python")
-print(my_group)
-my_group.add_student(st3)
-print(my_group)
-my_group.remove_student(1)
-print(my_group)
-group22 = [st2]
-my_group2 = Group(group22, "ГК Web")
-print(my_group2)
-Group.change_group(my_group, my_group2, 0)
-print("*" * 20)
-print(my_group)
-print(my_group2)
-Student.dump_to_json(st1, "student.json")
-Student.dump_to_json(st2, "student.json")
-Student.load_from_file("student.json")
-
-# Group.dump_group("group.json", my_group2)
-# Group.dump_group("group.json", my_group)
-# Group.upload_jornal("group.json")
+temp.append(26)
+temp.append(54)
+temp.list_print()
+print(temp.size())
+temp.insert(3, 17)
+temp.list_print()
+print(temp.search(27))
