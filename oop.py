@@ -3267,103 +3267,394 @@ import csv
 # print("a[1]", id(a[1]))
 # print("a[2]", id(a[2]))
 
-class Node:
-    def __init__(self, elem):
-        self.__data = elem  # элемент
-        self.__next = None  # ссылка на следующий узел
+# class Node:
+#     def __init__(self, elem):
+#         self.__data = elem  # элемент
+#         self.__next = None  # ссылка на следующий узел
+#
+#     def get_data(self):
+#         return self.__data
+#
+#     def get_next(self):
+#         return self.__next
+#
+#     def set_data(self, new_data):
+#         self.__data = new_data
+#
+#     def set_next(self, new_next):
+#         self.__next = new_next
+#
+#
+# class LinkedList:
+#     def __init__(self):
+#         self.head = None
+#
+#     def list_print(self):
+#         val = self.head
+#         while val:  # val is not None
+#             print(val.get_data(), end=" ")
+#             val = val.get_next()
+#         print()
+#
+#     def add(self, item):
+#         tmp = Node(item)  # создаем элемент
+#         tmp.set_next(self.head)  # прикрепляем новый элемент к списку
+#         self.head = tmp  # адрес нового элемента помещаем в голову
+#
+#     def append(self, item):
+#         new_item = Node(item)
+#         if self.head is None:
+#             self.head = new_item
+#             return
+#
+#         end = self.head
+#         while end.get_next():  # доходим до последнего элемента
+#             end = end.get_next()
+#         end.set_next(new_item)
+#
+#     def size(self):
+#         current = self.head
+#         count = 0
+#         while current is not None:
+#             count = count + 1
+#             current = current.get_next()
+#         return count
+#
+#     def insert(self, position, item):
+#         if position > self.size():
+#             raise IndexError("Индекс находится за пределами списка.")
+#
+#         current = self.head
+#         previous = None
+#         pos = 0
+#         if position == 0:
+#             self.add(item)
+#             return
+#         else:
+#             new_node = Node(item)
+#             while pos < position:
+#                 pos += 1
+#                 previous = current
+#                 current = current.get_next()
+#             previous.set_next(new_node)
+#             new_node.set_next(current)
+#
+#     def search(self, item):  # поиск по значению
+#         current = self.head
+#         found = False
+#         while current is not None and not found:
+#             if current.get_data() == item:
+#                 found = True
+#             else:
+#                 current = current.get_next()
+#         return found
+#
+#     def pop(self, position=None):
+#         ret = None
+#         current = self.head
+#         if position is None:
+#             ret = current.get_data()
+#             self.head = current.get_next()
+#         elif position > self.size() - 1:
+#             raise IndexError("Индекс находится за пределами списка")
+#         else:
+#             pos = 0
+#             previous = None
+#             while pos < position:
+#                 previous = current
+#                 current = current.get_next()
+#                 pos += 1
+#                 ret = current.get_data()
+#             previous.set_next(current.get_next())
+#         print(ret)
+#         return ret
+#
+#     def reverse(self):
+#         p = self.head
+#         self.head = None
+#         while p is not None:
+#             p0, p = p, p.get_next()
+#             p0.set_next(self.head)
+#             self.head = p0
+#
+#
+# temp = LinkedList()
+# temp.head = Node(93)
+# temp.list_print()
+# temp.add(31)
+# temp.add(77)
+# temp.list_print()
+#
+# temp.append(26)
+# temp.append(54)
+# temp.list_print()
+# print(temp.size())
+# temp.insert(3, 17)
+# temp.list_print()
+# print(temp.search(27))
+# temp.pop()
+# temp.list_print()
+# temp.pop(2)
+# temp.list_print()
+# temp.reverse()
+# temp.list_print()
 
-    def get_data(self):
-        return self.__data
+# class Node:
+#     def __init__(self, elem, nxt=None, prev=None):
+#         self.data = elem
+#         self.prev = prev
+#         self.next = nxt
+#
+#
+# class DoublyLinkedList:  # двусвязный список
+#     def __init__(self, head=None, tail=None):
+#         self.head = head
+#         self.tail = tail
+#
+#     def add(self, elem):
+#         if self.head is None:
+#             item = Node(elem)
+#             self.head = item
+#             self.tail = self.head
+#         else:
+#             item = Node(elem, self.head)
+#             self.head.prev = item
+#             self.head = self.head.prev
+#
+#     def is_empty(self):
+#         return self.head is None and self.tail is None
+#
+#     def append(self, elem):
+#         if self.tail is None:
+#             # item = Node(None, None, elem)
+#             # self.head = item
+#             # self.tail = self.head
+#             self.add(elem)
+#         else:
+#             item = Node(elem, None, self.tail)
+#             self.tail.next = item
+#             self.tail = item
+#
+#     def pop(self):
+#         if self.head == self.tail:
+#             self.head = self.tail = None
+#             return
+#         self.tail = self.tail.prev
+#         self.tail.next = None
+#
+#     def shift(self):
+#         if self.head == self.tail:
+#             self.head = self.tail = None
+#             return
+#         self.head = self.head.next
+#         self.head.prev = None
+#
+#     def print(self):
+#         val = self.head
+#         print("Список ссылок:")
+#         while val:
+#             print(val.data)
+#             val = val.next
+#         print()
+#
+#
+# links = [
+#     'http://site.ru',
+#     'http://site.ru/news',
+#     'http://site.ru/contacts',
+#     'http://site.ru/about'
+# ]
+#
+# link = DoublyLinkedList()
+# for name in links:
+#     link.add(name)
+#
+# while True:
+#     if not link.is_empty():
+#         link.print()
+#     else:
+#         print("Список ссылок пуст")
+#     print('Меню')
+#     print('1 - добавить элемент в начало списка')
+#     print('2 - добавить элемент в конец списка')
+#     print('3 - удалить элемент из конеца списка')
+#     print('4 - удалить элемент из начала списка')
+#     print('0 - выйти')
+#     operation = input('-> ')
+#     if operation == "1":
+#         a = input("Новая ссылка: ")
+#         link.add(a)
+#
+#     elif operation == "2":
+#         a = input("Новая ссылка: ")
+#         link.append(a)
+#
+#     elif operation == "3":
+#         link.pop()
+#
+#     elif operation == "4":
+#         link.shift()
+#
+#     elif operation == "0":
+#         print("Всего доброго!")
+#         break
 
-    def get_next(self):
-        return self.__next
+# class Stack:
+#     def __init__(self):
+#         self.stack = []
+#
+#     def __str__(self):
+#         return f"{self.stack}"
+#
+#     def push(self, item):
+#         self.stack.append(item)
+#
+#     def size(self):
+#         return len(self.stack)
+#
+#     def pop(self):
+#         if len(self.stack) == 0:
+#             return None
+#         return self.stack.pop()
+#
+#
+# a = Stack()
+# a.push(1)
+# a.push(2)
+# a.push(3)
+# print(a)
+# print(a.size())
+# a.pop()
+# a.pop()
+# print(a)
 
-    def set_data(self, new_data):
-        self.__data = new_data
+# class Stack:
+#     def __init__(self):
+#         self.stack = []
+#
+#     def __str__(self):
+#         return f"{self.stack}"
+#
+#     def is_empty(self):
+#         return self.stack == []
+#
+#     def push(self, item):
+#         self.stack.append(item)
+#
+#     def size(self):
+#         return len(self.stack)
+#
+#     def pop(self):
+#         if len(self.stack) == 0:
+#             return None
+#         return self.stack.pop()
+#
+#
+# brackets = {
+#     ")": "(",
+#     ">": "<"
+# }
+#
+#
+# def balanced(text):
+#     s = Stack()
+#     for c in text:
+#         if c in brackets.values():
+#             s.push(c)
+#         elif c in brackets:
+#             if s.is_empty():
+#                 return False
+#             elif brackets[c] != s.pop():
+#                 return False
+#     return s.is_empty()
+#
+#
+# print(balanced('(<x>)(())()'))
+# print(balanced('<((<<hello>>))>'))
+# print(balanced('<(x)<y>)z'))
 
-    def set_next(self, new_next):
-        self.__next = new_next
+# class Queue:  # Очередь
+#     def __init__(self):
+#         self.queue = []
+#
+#     def push(self, item):
+#         self.queue.append(item)
+#
+#     def show(self):
+#         return self.queue
+#
+#     def pop(self):
+#         if len(self.queue) == 0:
+#             return None
+#         return self.queue.pop(0)
+#
+#
+# s = Queue()
+# s.push(1)
+# s.push(2)
+# s.push(3)
+# print(s.show())
+# s.pop()
+# s.pop()
+# print(s.show())
 
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
-
-    def list_print(self):
-        val = self.head
-        while val:  # val is not None
-            print(val.get_data(), end=" ")
-            val = val.get_next()
-        print()
-
-    def add(self, item):
-        tmp = Node(item)  # создаем элемент
-        tmp.set_next(self.head)  # прикрепляем новый элемент к списку
-        self.head = tmp  # адрес нового элемента помещаем в голову
-
-    def append(self, item):
-        new_item = Node(item)
-        if self.head is None:
-            self.head = new_item
-            return
-
-        end = self.head
-        while end.get_next():  # доходим до последнего элемента
-            end = end.get_next()
-        end.set_next(new_item)
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.get_next()
-        return count
-
-    def insert(self, position, item):
-        if position > self.size():
-            raise IndexError("Индекс находится за пределами списка.")
-
-        current = self.head
-        previous = None
-        pos = 0
-        if position == 0:
-            self.add(item)
-            return
-        else:
-            new_node = Node(item)
-            while pos < position:
-                pos += 1
-                previous = current
-                current = current.get_next()
-            previous.set_next(new_node)
-            new_node.set_next(current)
-
-    def search(self, item):  # поиск по значению
-        current = self.head
-        found = False
-        while current is not None and not found:
-            if current.get_data() == item:
-                found = True
-            else:
-                current = current.get_next()
-        return found
+import socket
+from view import index, blog
 
 
-# temp = Node(93)
-# print(temp.get_data())
+URLS = {
+    '/': index,
+    '/blog': blog
+}
 
-temp = LinkedList()
-temp.head = Node(93)
-temp.list_print()
-temp.add(31)
-temp.add(77)
-temp.list_print()
 
-temp.append(26)
-temp.append(54)
-temp.list_print()
-print(temp.size())
-temp.insert(3, 17)
-temp.list_print()
-print(temp.search(27))
+def parse_request(request):
+    parsed = request.split(' ')
+    method = parsed[0]
+    url = parsed[1]
+    return method, url
+
+
+def generate_headers(method, url):
+    if method != 'GET':
+        return 'HTTP/1.1 405 Method Not Allowed!\n\n', 405
+    if url not in URLS:
+        return 'HTTP/1.1 404 Method Not Found!\n\n', 404
+    return 'HTTP/1.1 200 OK!\n\n', 200
+
+
+def generate_connect(code, url):
+    if code == 404:
+        return '<h1>404</h1><h3>Not Found</h3>'
+    elif code == 405:
+        return '<h1>405</h1><h3>Method Not Allowed</h3>'
+    return URLS[url]()
+
+
+def generate_response(request):
+    method, url = parse_request(request)
+    headers, code = generate_headers(method, url)
+    body = generate_connect(code, url)
+    return (headers + body).encode()
+
+
+def run():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('127.0.0.1', 5000))  # 127.0.0.1:5000
+    server_socket.listen()
+
+    while True:
+        client_socket, addr = server_socket.accept()
+        request = client_socket.recv(1024)
+        print(f"Клиент: {addr} => \n{request.decode('utf-8')}\n")
+
+        response = generate_response(request.decode())
+        client_socket.sendall(response)
+        client_socket.close()
+
+
+if __name__ == "__main__":
+    run()
+
+
