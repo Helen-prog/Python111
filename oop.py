@@ -3013,7 +3013,6 @@
 
 import csv
 
-
 # with open("data.csv") as f:
 #     reader = csv.reader(f, delimiter=",")
 #     count = 0
@@ -3599,62 +3598,258 @@ import csv
 # print(s.show())
 
 
-import socket
-from view import index, blog
+# import socket
+# from view import index, blog
+#
+#
+# URLS = {
+#     '/': index,
+#     '/blog': blog
+# }
+#
+#
+# def parse_request(request):
+#     parsed = request.split(' ')
+#     method = parsed[0]
+#     url = parsed[1]
+#     return method, url
+#
+#
+# def generate_headers(method, url):
+#     if method != 'GET':
+#         return 'HTTP/1.1 405 Method Not Allowed!\n\n', 405
+#     if url not in URLS:
+#         return 'HTTP/1.1 404 Method Not Found!\n\n', 404
+#     return 'HTTP/1.1 200 OK!\n\n', 200
+#
+#
+# def generate_connect(code, url):
+#     if code == 404:
+#         return '<h1>404</h1><h3>Not Found</h3>'
+#     elif code == 405:
+#         return '<h1>405</h1><h3>Method Not Allowed</h3>'
+#     return URLS[url]()
+#
+#
+# def generate_response(request):
+#     method, url = parse_request(request)
+#     headers, code = generate_headers(method, url)
+#     body = generate_connect(code, url)
+#     return (headers + body).encode()
+#
+#
+# def run():
+#     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     server_socket.bind(('127.0.0.1', 5000))  # 127.0.0.1:5000
+#     server_socket.listen()
+#
+#     while True:
+#         client_socket, addr = server_socket.accept()
+#         request = client_socket.recv(1024)
+#         print(f"Клиент: {addr} => \n{request.decode('utf-8')}\n")
+#
+#         response = generate_response(request.decode())
+#         client_socket.sendall(response)
+#         client_socket.close()
+#
+#
+# if __name__ == "__main__":
+#     run()
 
 
-URLS = {
-    '/': index,
-    '/blog': blog
-}
+# import sqlite3 as sq
+#
+# cars = [
+#     ('BMV', 54000),
+#     ('Chevrolet', 46000),
+#     ('Daewoo', 38000),
+#     ('Citroen', 29000),
+#     ('Honda', 33000)
+# ]
+#
+# con = None
+# try:
+#     con = sq.connect("cars.db")
+#     cur = con.cursor()
+#     cur.executescript("""
+#     CREATE TABLE IF NOT EXISTS cars(
+#         car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         model TEXT,
+#         price INTEGER
+#     );
+#     BEGIN;
+#     INSERT INTO cars VALUES(NULL, 'Renault', 22000);
+#     UPDATE cars2 SET price = price + 100;
+#     """)
+#     con.commit()
+#
+# except sq.Error as e:
+#     if con:
+#         con.rollback()
+#     print("Ошибка выполнения запроса")
+#
+# finally:
+#     if con:
+#         con.close()
+
+#
+# with sq.connect("cars.db") as con:
+#     cur = con.cursor()
+#     cur.execute("""
+#     CREATE TABLE IF NOT EXISTS cars(
+#         car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         model TEXT,
+#         price INTEGER
+#     )
+#     """)
+#
+#     cur.executescript("""
+#     DELETE FROM cars WHERE model LIKE 'B%';
+#     UPDATE cars SET price = price + 100;
+#     """)
+
+# cur.execute("UPDATE cars SET price = :Price WHERE model LIKE 'B%'", {'Price': 0})
+
+# cur.executemany("INSERT INTO cars VALUES(NULL, ?, ?)", cars)
+
+# for car in cars:
+#     cur.execute("INSERT INTO cars VALUES(NULL, ?, ?)", car)
+
+# cur.execute("INSERT INTO cars VALUES(1, 'Renault', 22000)")
+# cur.execute("INSERT INTO cars VALUES(2, 'Volvo', 29000)")
+# cur.execute("INSERT INTO cars VALUES(3, 'Mercedes', 57000)")
+# cur.execute("INSERT INTO cars VALUES(4, 'Bentley', 35000)")
+# cur.execute("INSERT INTO cars VALUES(5, 'Audi', 52000)")
+
+# con.commit()
+# con.close()
+
+# import sqlite3 as sq
+#
+#
+# with sq.connect("cars.db") as con:
+#     cur = con.cursor()
+#     cur.executescript("""
+#     CREATE TABLE IF NOT EXISTS cars(
+#         car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         model TEXT,
+#         price INTEGER
+#     );
+#     CREATE TABLE IF NOT EXISTS cost(
+#         name TEXT, tr_in INTEGER, buy INTEGER
+#     );
+#     """)
+#
+#     cur.execute("INSERT INTO cars VALUES(NULL, 'Запорожец', 1000)")
+#     last_row_id = cur.lastrowid
+#     buy_car_id = 2
+#
+#     cur.execute("INSERT INTO cost VALUES('Илья', ?, ?)", (last_row_id, buy_car_id))
 
 
-def parse_request(request):
-    parsed = request.split(' ')
-    method = parsed[0]
-    url = parsed[1]
-    return method, url
+# import sqlite3 as sq
+#
+#
+# with sq.connect("cars.db") as con:
+#     con.row_factory = sq.Row
+#     cur = con.cursor()
+#     cur.executescript("""
+#     CREATE TABLE IF NOT EXISTS cars(
+#         car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         model TEXT,
+#         price INTEGER
+#     );
+#     """)
+#
+#     cur.execute("SELECT model, price FROM cars")
+#
+#     # row = cur.fetchall()
+#     # row = cur.fetchone()
+#     # row = cur.fetchmany(5)
+#     # print(row)
+#     for res in cur:
+#         print(res['model'], res['price'])
 
 
-def generate_headers(method, url):
-    if method != 'GET':
-        return 'HTTP/1.1 405 Method Not Allowed!\n\n', 405
-    if url not in URLS:
-        return 'HTTP/1.1 404 Method Not Found!\n\n', 404
-    return 'HTTP/1.1 200 OK!\n\n', 200
+# import sqlite3 as sq
+#
+#
+# def read_ava(n):
+#     try:
+#         with open(f"avatars/{n}.png", 'rb') as f:
+#             return f.read()
+#     except IOError as e:
+#         print(e)
+#         return False
+#
+#
+# def write_ava(name, data):
+#     try:
+#         with open(name, "wb") as f:
+#             f.write(data)
+#     except IOError as e:
+#         print(e)
+#         return False
+#
+#     return True
+#
+#
+# with sq.connect("cars.db") as con:
+#     con.row_factory = sq.Row
+#     cur = con.cursor()
+#
+#     cur.executescript("""
+#        CREATE TABLE IF NOT EXISTS users(
+#           name TEXT,
+#           ava BLOB,
+#           score INTEGER
+#        );
+#        """)
+#
+#     cur.execute("SELECT ava FROM users LIMIT 1")
+#     img = cur.fetchone()['ava']
+#
+#     write_ava("out.png", img)
 
 
-def generate_connect(code, url):
-    if code == 404:
-        return '<h1>404</h1><h3>Not Found</h3>'
-    elif code == 405:
-        return '<h1>405</h1><h3>Method Not Allowed</h3>'
-    return URLS[url]()
+# img = read_ava(1)
+# if img:
+#     binary = sq.Binary(img)
+#     cur.execute("INSERT INTO users VALUES('Илья', ?, 1000)", (binary,))
+
+# import sqlite3 as sq
+#
+# with sq.connect("cars.db") as con:
+#     cur = con.cursor()
+#
+#     with open("sql_dump.sql", "r") as f:
+#         sql = f.read()
+#         cur.executescript(sql)
+
+# with open("sql_dump.sql", "w") as f:
+#     for sql in con.iterdump():
+#         f.write(sql)
 
 
-def generate_response(request):
-    method, url = parse_request(request)
-    headers, code = generate_headers(method, url)
-    body = generate_connect(code, url)
-    return (headers + body).encode()
+# for sql in con.iterdump():
+#     print(sql)
 
 
-def run():
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('127.0.0.1', 5000))  # 127.0.0.1:5000
-    server_socket.listen()
-
-    while True:
-        client_socket, addr = server_socket.accept()
-        request = client_socket.recv(1024)
-        print(f"Клиент: {addr} => \n{request.decode('utf-8')}\n")
-
-        response = generate_response(request.decode())
-        client_socket.sendall(response)
-        client_socket.close()
-
-
-if __name__ == "__main__":
-    run()
+# import sqlite3 as sq
+#
+# data = [("car", "машина"), ("house", "дом"), ("tree", "дерево"), ("color", "цвет")]
+#
+# con = sq.connect(':memory:')
+# with con:
+#     cur = con.cursor()
+#     cur.execute("""
+#     CREATE TABLE IF NOT EXISTS dict(
+#     eng TEXT,
+#     rus TEXT)""")
+#
+#     cur.executemany("INSERT INTO dict VALUES(?, ?)", data)
+#
+#     cur.execute("SELECT rus FROM dict WHERE eng LIKE 'c%'")
+#     print(cur.fetchall())
 
 
